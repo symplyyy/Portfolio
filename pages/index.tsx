@@ -72,16 +72,16 @@ export default function Home() {
     };
 
     createClouds(layer1Ref, "/images/header/clouds.png", 0.25, {
-      yRange: [10, 40],
+      yRange: [5, 25],
       numClouds: 3,
     });
     createClouds(layer2Ref, "/images/header/clouds 2.png", 0.18, {
-      yRange: [35, 70],
+      yRange: [25, 45],
       numClouds: 4,
     });
     createClouds(layer3Ref, "/images/header/minicloud.png", 0.1, {
       isMini: true,
-      yRange: [60, 85],
+      yRange: [30, 55],
       numClouds: 2,
     });
 
@@ -126,7 +126,7 @@ export default function Home() {
     <header
       className="
         relative
-        h-[1694px]
+        h-[1200px]
         w-full
         bg-center
         bg-no-repeat
