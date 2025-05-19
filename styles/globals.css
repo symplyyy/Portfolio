@@ -61,52 +61,28 @@ body {
   inset: 0;
   pointer-events: none;
   overflow: hidden;
+  z-index: 0;
 }
 
 .clouds-layer {
   position: absolute;
-  width: 150%;
-  height: 50%;         /* passe de 100% à 50% pour réduire la taille */
-  background-repeat: repeat-x;
-  background-size: contain;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-out;
+}
+
+.cloud {
+  position: absolute;
+  height: auto;
+  width: 900px; /* plus lisible pour le layout horizontal */
+  opacity: 1;
   will-change: transform;
+  object-fit: contain;
+  z-index: 2;
 }
 
-.clouds-layer-1 {
-  background-image: url('/images/header/clouds.png');
+.cloud.minicloud {
+  width: 300px;
   opacity: 1;
-  top: 10%;
-
-  /* départ à 0% */
-  background-position: 0% 0;
-  animation: scrollClouds 30s linear infinite;
-}
-
-.clouds-layer-2 {
-  background-image: url('/images/header/clouds 2.png');
-  opacity: 1;
-  top: 40%;
-
-  /* démarrage à 50% de la largeur */
-  background-position: 50% 0;
-  animation: scrollClouds 45s linear infinite;
-}
-
-.clouds-layer-3 {
-  background-image: url('/images/header/minicloud.png');
-  opacity: 1;
-  top: 70%;
-
-  /* démarrage à 25% de la largeur */
-  background-position: 25% 0;
-  animation: scrollClouds 60s linear infinite;
-}
-
-/* Votre animation de flottement et le reste inchangés */
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(-10px); }
-}
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+  z-index: -1; /* derrière les autres nuages */
 }
