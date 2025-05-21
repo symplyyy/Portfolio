@@ -1,5 +1,6 @@
 import NavLink from "./Navlink";
 import { FaLinkedinIn } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 
 export default function Navbar() {
@@ -23,10 +24,13 @@ export default function Navbar() {
 
       {/* Icônes à droite */}
       <div className="flex gap-4 items-center mt-7">
-        <a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#CDFB52] transition-colors text-lg">
+      <a href="https://github.com/tonprofil" target="_blank" rel="noopener noreferrer" className="text-whiteg hover:text-[#CDFB52] transition-colors text-lg">
+        <FaGithub />
+        </a>
+        <a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer" className="text-whiteg hover:text-[#CDFB52] transition-colors text-lg">
           <FaLinkedinIn />
         </a>
-        <a href="mailto:tonemail@example.com" className="text-white hover:text-[#CDFB52] transition-colors text-lg">
+        <a href="mailto:tonemail@example.com" className="text-whiteg hover:text-[#CDFB52] transition-colors text-lg">
           <HiOutlineMail />
         </a>
         

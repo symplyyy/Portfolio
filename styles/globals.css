@@ -4,12 +4,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-artegra: 'Artegra', sans-serif;
+  --font-nexa: 'Nexa', sans-serif;
 }
 
 @font-face {
-  font-family: 'Artegra';
-  src: url('/fonts/Fontspring-DEMO-artegra_sans-alt-900-black.otf') format('opentype');
+  font-family: 'Nexa';
+  src: url('/fonts/nexa-black.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -18,13 +18,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-artegra), var(--font-geist-sans);
+  --font-sans: var(--font-nexa), var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: white;
+    --background: #FFFFF7;
     --foreground: #ededed;
   }
 }
@@ -32,7 +32,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-artegra);
+  font-family: var(--font-nexa);
 }
 
 @keyframes float {
@@ -45,6 +45,10 @@ body {
   100% {
     transform: translateY(0px);
   }
+}
+
+.text-whiteg {
+  color: #FFFFF7 !important;
 }
 
 .animate-float {
@@ -61,7 +65,6 @@ body {
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  z-index: 0;
 }
 
 .clouds-layer {
@@ -78,11 +81,9 @@ body {
   opacity: 1;
   will-change: transform;
   object-fit: contain;
-  z-index: 2;
 }
 
 .cloud.minicloud {
   width: 300px;
-  opacity: 1;
-  z-index: -1; /* derrière les autres nuages */
+  opacity: 1;/* derrière les autres nuages */
 }
