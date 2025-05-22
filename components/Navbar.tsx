@@ -11,6 +11,7 @@ export default function Navbar() {
         <img src="/images/logo_portfolio.png" alt="Logo" className="h-8 mt-7" />
       </div>
       
+      
 
       {/* Liens centrés */}
       <div className="absolute left-1/2 transform -translate-x-1/2 mt-7">
