@@ -134,30 +134,37 @@ export default function Navbar() {
       {isMobile && (
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative z-[999] mt-7 w-8 h-8 flex flex-col justify-center items-center"
+          className={`
+            relative z-[999] mt-7 flex flex-col justify-center items-center
+            p-3 rounded-2xl
+            transition-all duration-500 ease-in-out
+            ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
+          `}
           aria-label="Menu"
         >
-          <div 
-            className={`w-6 h-0.5 absolute transition-all duration-300 ease-in-out origin-center ${
-              isOpen 
-                ? 'rotate-45 translate-y-0 !bg-black' 
-                : `translate-y-[-6px] ${isInMain ? '!bg-black' : 'bg-white'}`
-            }`}
-          />
-          <div 
-            className={`w-6 h-0.5 absolute transition-all duration-300 ease-in-out ${
-              isOpen 
-                ? 'opacity-0 !bg-black' 
-                : `opacity-100 ${isInMain ? '!bg-black' : 'bg-white'}`
-            }`}
-          />
-          <div 
-            className={`w-6 h-0.5 absolute transition-all duration-300 ease-in-out origin-center ${
-              isOpen 
-                ? '-rotate-45 translate-y-0 !bg-black' 
-                : `translate-y-[6px] ${isInMain ? '!bg-black' : 'bg-white'}`
-            }`}
-          />
+          <div className="w-8 h-8 relative">
+            <div 
+              className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out origin-center ${
+                isOpen 
+                  ? 'rotate-45 translate-y-0 !bg-black' 
+                  : `translate-y-[-6px] ${isInMain ? '!bg-black' : 'bg-white'}`
+              }`}
+            />
+            <div 
+              className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out ${
+                isOpen 
+                  ? 'opacity-0 !bg-black' 
+                  : `opacity-100 ${isInMain ? '!bg-black' : 'bg-white'}`
+              }`}
+            />
+            <div 
+              className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out origin-center ${
+                isOpen 
+                  ? '-rotate-45 translate-y-0 !bg-black' 
+                  : `translate-y-[6px] ${isInMain ? '!bg-black' : 'bg-white'}`
+              }`}
+            />
+          </div>
         </button>
       )}
 
