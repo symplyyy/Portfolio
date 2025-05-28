@@ -182,7 +182,7 @@ body {
   width: 900px;
   opacity: 1;
   will-change: transform, top, opacity;
-  transition: top 1s ease-out, opacity 1s ease-out;
+  transition: top 2s ease-out, opacity 2s ease-out;
   object-fit: contain;
 }
 
