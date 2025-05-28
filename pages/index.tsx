@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import { BoxReveal } from "@/components/magicui/box-reveal";
 import LoadingScreen from "@/components/LoadingScreen";
 import DiagonalRevealText from "@/components/DiagonalRevealText";
+import ScrollFloat from "../components/ScrollFloat";
 
 /* TODO : Ajout mode nuit */
 
@@ -325,9 +326,11 @@ export default function Home() {
 
             {/* Nouveau bloc bleu */}
             <section className="relative bg-[#6299CE] w-full h-[80vh] -mt-40 md:-mt-60 flex items-center justify-center">
-              <h2 className="text-white text-[1.8rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20">
+              <ScrollFloat
+                containerClassName="text-white text-[1.8rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+              >
                 COMPÉTENCES
-              </h2>
+              </ScrollFloat>
             </section>
           </main>
         </div>
