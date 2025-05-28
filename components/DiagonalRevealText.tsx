@@ -4,46 +4,43 @@ import { useRef } from "react";
 interface DiagonalRevealTextProps {
   text: string;
   backgroundColor: string;
-  angle: number; // px de pente
+  angle: number;
   index: number;
 }
 
-export default function DiagonalRevealText({
-  text,
-  backgroundColor,
-  angle,
-  index,
+export default function DiagonalRevealText({ 
+  text, 
+  backgroundColor, 
+  angle, 
+  index 
 }: DiagonalRevealTextProps) {
   const ref = useRef<HTMLDivElement>(null);
-  
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 80%", "start 40%"],
+    offset: ["start 80%", "start 40%"]
   });
 
   const maskScaleY = useTransform(scrollYProgress, [0, 1], [1, 0]);
-
-  // Approximation : angle (px) sur 1000px de largeur pour trouver l'angle de rotation du texte
   const rotationDeg = -(Math.atan(angle / 1000) * (180 / Math.PI));
 
   return (
-    <div
+    <div 
       ref={ref}
-      className="relative w-full h-[180px] md:h-[220px] overflow-visible"
-      style={{ zIndex: 10 - index }} // Gestion de la superposition avec z-index
+      className="relative w-[150vw] sm:w-[130vw] md:w-full h-[140px] sm:h-[200px] md:h-[330px] overflow-visible -ml-[25vw] sm:-ml-[15vw] md:ml-0"
+      style={{ zIndex: 10 - index }}
     >
       {/* Bande inclinée */}
       <div
         style={{
           backgroundColor,
-          clipPath: `polygon(0 ${angle}px, 100% 0, 100% calc(100% - ${angle}px), 0 100%)`,
+          clipPath: `polygon(0 ${angle * 0.8}px, 100% 0, 100% calc(100% - ${angle * 0.8}px), 0 100%)`,
         }}
         className="absolute inset-0 flex items-center justify-center"
       >
         <span
-          className="text-white text-[2.7rem] md:text-[5.5rem] font-black whitespace-nowrap tracking-wider"
+          className="text-white text-[1.8rem] sm:text-[2rem] md:text-[6rem] font-black whitespace-nowrap tracking-wider px-4 md:px-0"
           style={{
-            transform: `rotate(${rotationDeg}deg)`,
+            transform: `rotate(${rotationDeg * 0.5}deg)`,
           }}
         >
           {text}

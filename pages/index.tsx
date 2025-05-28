@@ -4,6 +4,8 @@ import { BoxReveal } from "@/components/magicui/box-reveal";
 import LoadingScreen from "@/components/LoadingScreen";
 import DiagonalRevealText from "@/components/DiagonalRevealText";
 
+/* TODO : Ajout mode nuit */
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const layer1Ref = useRef<HTMLDivElement>(null);
@@ -46,6 +48,7 @@ export default function Home() {
       const num = options?.numClouds ?? 6;
       const margin = options?.horizontalMargin ?? 300;
       const jitter = options?.jitterFactor ?? 0.3;
+      const isMobile = window.innerWidth < 768;
     
       const totalWidth = window.innerWidth + margin * 2;
       const segmentWidth = totalWidth / num;
@@ -78,17 +81,18 @@ export default function Home() {
     
         const yFinal = generateY(options?.yRange || [10, 90]);
     
-        const scale = options?.isMini
+        const baseScale = options?.isMini
           ? Math.random() * 0.3 + 0.3
           : Math.random() * 0.5 + 0.9;
+        
+        // Réduire la taille de 20%
+        const scale = baseScale * 0.8;
         cloud.dataset.scale = scale.toString();
     
-        // Commencer en bas de l'écran
         cloud.style.top = "100%";
         cloud.style.transform = `translateX(${x}px) scale(${scale})`;
         ref.current.appendChild(cloud);
 
-        // Animation d'entrée avec délai progressif
         setTimeout(() => {
           cloud.style.top = `${yFinal}%`;
           cloud.classList.remove("opacity-0");
@@ -172,12 +176,11 @@ export default function Home() {
       {/* Fond de transition */}
       <div 
         className={`fixed inset-0 bg-center bg-no-repeat transition-opacity duration-1000 ${
-          isLoading ? 'opacity-100' : 'opacity-0'
+          isLoading ? 'opacity-100 z-[9998]' : 'opacity-0 z-[-1]'
         }`}
         style={{
           backgroundImage: "url('/images/header/background.png')",
           backgroundSize: "100% 100%",
-          zIndex: 9998
         }}
       />
       {isLoading && (
@@ -189,124 +192,129 @@ export default function Home() {
         <header
           className="
             relative
-            h-[90rem]
+            h-[45rem]
+            sm:h-[60rem]
+            md:h-[90rem]
             w-full
             bg-center
             bg-no-repeat
-            flex flex-col items-center justify-start
-            pt-[200px]
+            flex flex-col items-center
+            pt-0
+            md:pt-[200px]
             mb-0
             overflow-hidden
           "
           style={{
             backgroundImage: "url('/images/header/background.png')",
             backgroundSize: "100% 100%",
+            zIndex: 0,
+            position: "relative"
           }}
         >
-          <div className="clouds-container">
-            <div ref={layer1Ref} className="clouds-layer z-0" />
-            <div ref={layer2Ref} className="clouds-layer z-0" />
-            <div ref={layer3Ref} className="clouds-layer z-3" />
+          <div className="clouds-container" style={{ zIndex: 1, pointerEvents: 'none' }}>
+            <div ref={layer1Ref} className="clouds-layer" style={{ pointerEvents: 'none' }} />
+            <div ref={layer2Ref} className="clouds-layer" style={{ pointerEvents: 'none' }} />
+            <div ref={layer3Ref} className="clouds-layer" style={{ pointerEvents: 'none' }} />
           </div>
 
           <Navbar />
 
           <div
             ref={parallaxRef}
-            className={`relative z-2 flex flex-col justify-center items-center ${
+            className={`relative z-[50] flex flex-col justify-center items-center px-4 md:px-0 h-full md:h-auto ${
               !isLoading ? 'zoom-in' : 'opacity-0 scale-50'
             }`}
           >
             <img
               src="/images/logo_portfolio.png"
               alt="Portfolio logo"
-              className="w-full max-w-[1000px]"
+              className="w-full max-w-[400px] sm:max-w-[600px] md:max-w-[1000px] mb-4 md:mb-0"
             />
-            <p className="text-whiteg z-[1] relative font-artegra text-sm md:text-base mt-18 tracking-widest font-medium">
+            <p className="text-whiteg z-[1] relative font-artegra text-xs sm:text-sm md:text-base tracking-widest font-medium text-center">
               TIMÉO SOËTE / DÉVELOPPEUR WEB
             </p>
           </div>
         </header>
 
         <main>
-          <section className={`mt-0 px-6 w-full mb-2 max-w-8xl mx-auto flex flex-col md:flex-row justify-center items-start transition-all duration-1000 delay-500 ${
-            !isLoading ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
-            <div className="flex-1 space-y-2 max-w-[600px]">
-              <BoxReveal boxColor={"#ff00b7"} duration={0.5}>
-                <p className="bg-black text-white text-xl md:text-3xl font-bold px-3 pr-10 py-2 inline-block clip-triangle-right">
+          <section 
+            className={`mt-0 px-4 md:px-6 pb-0 md:pb-10 w-full mb-2 max-w-8xl mx-auto flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-0 transition-all duration-1000 delay-500 ${
+              !isLoading ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`} 
+            style={{ position: 'relative', zIndex: 20 }}
+          >
+            <div className="flex-1 space-y-2 max-w-full md:max-w-[900px] scale-[0.8] md:scale-100 origin-top">
+              <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
+                <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
                   Je m'appelle Timéo
                 </p>
               </BoxReveal>
-              <BoxReveal boxColor={"#ff00b7"} duration={0.5}>
-                <p className="bg-black text-white text-xl md:text-3xl font-bold px-3 pr-10 py-2 inline-block clip-triangle-right">
+              <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
+                <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
                   je donne vie aux idées sur le web.
                 </p>
               </BoxReveal>
-              <BoxReveal boxColor={"#ff00b7"} duration={0.5}>
-                <p className="bg-black text-white text-xl md:text-3xl font-bold px-3 pr-10 py-2 inline-block clip-triangle-right">
+              <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
+                <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
                   Entre lignes de code et pixels bien
                 </p>
               </BoxReveal>
-              <BoxReveal boxColor={"#ff00b7"} duration={0.5}>
-                <p className="bg-black text-white text-xl md:text-3xl font-bold px-3 pr-10 py-2 inline-block clip-triangle-right">
+              <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
+                <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
                   placés je conçois des sites modernes,
                 </p>
               </BoxReveal>
-              <BoxReveal boxColor={"#ff00b7"} duration={0.5}>
-                <p className="bg-black text-white text-xl md:text-3xl font-bold px-3 pr-10 py-2 inline-block clip-triangle-right">
+              <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
+                <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
                   dynamiques et accessibles.
                 </p>
               </BoxReveal>
-              <BoxReveal boxColor={"#ff00b7"} duration={0.5}>
-                <p className="bg-black text-white text-xl md:text-3xl font-bold px-3 pr-10 py-2 inline-block clip-triangle-right">
+              <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
+                <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
                   Ce portfolio est ma vitrine,
                 </p>
               </BoxReveal>
               <div className="relative inline-block">
-                <BoxReveal boxColor={"#ff00b7"} duration={0.5}>
-                  <p className="bg-black text-white text-xl md:text-3xl font-bold px-3 pr-10 py-2 clip-triangle-right">
+                <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
+                  <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 clip-triangle-right">
                     n'hésitez pas à explorer !
                   </p>
                 </BoxReveal>
               </div>
             </div>
 
-            <div className="ml-6 flex justify-center animate-float">
+            <div className="md:ml-6 flex justify-center animate-float order-first md:order-last hidden md:flex">
               <img
                 src="/images/avatar.png"
                 alt="Développeur sur un nuage"
-                className="w-[400px] md:w-[500px] max-w-full"
+                className="w-[280px] md:w-[600px] max-w-full"
               />
             </div>
           </section>
-          <section>
-            <div className="text-white text-4xl font-bold">Bienvenue sur mon site</div>
-          </section>
-          <section className="relative py-3 mb-60">
-            <div className="space-y-[-80px]">
+          <section className="relative py-3 mb-50 md:mb-60 overflow-x-hidden">
+            <div className="space-y-[-40px] sm:space-y-[-60px] md:space-y-[-120px]">
               <DiagonalRevealText 
-                text="INGRÉDIENTS NATURELS" 
-                backgroundColor="#69B7EE" 
+                text="FRONTEND & BACKEND" 
+                backgroundColor="#69B7EE"
                 angle={45}
                 index={0}
               />
               <DiagonalRevealText 
-                text="FAIBLE EN CALORIES" 
-                backgroundColor="#E5A4E1" 
-                angle={35}
+                text="DESIGN RESPONSIVE" 
+                backgroundColor="#E5A4E1"
+                angle={60}
                 index={1}
               />
               <DiagonalRevealText 
-                text="PROBIOTIQUES" 
-                backgroundColor="#5A1441" 
+                text="PERFORMANCE & SEO" 
+                backgroundColor="#5A1441"
                 angle={27}
                 index={2}
               />
               <DiagonalRevealText 
-                text="NON PASTEURISÉ" 
-                backgroundColor="#FF9776" 
-                angle={20}
+                text="ACCESSIBILITÉ" 
+                backgroundColor="#FF9776"
+                angle={40}
                 index={3}
               />
             </div>
