@@ -1,6 +1,7 @@
 import "@/styles/globals.css"
 import type { AppProps } from "next/app"
 import { Geist, Geist_Mono } from "next/font/google"
+import SmoothScroll from "@/components/SmoothScroll"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +15,10 @@ const geistMono = Geist_Mono({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className={`${geistSans.variable} ${geistMono.variable} font-sans`}>
-      <Component {...pageProps} />
-    </div>
+    <SmoothScroll>
+      <div className={`${geistSans.variable} ${geistMono.variable} font-sans`}>
+        <Component {...pageProps} />
+      </div>
+    </SmoothScroll>
   )
 }

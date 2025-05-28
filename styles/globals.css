@@ -129,7 +129,7 @@ body {
 .reveal-text {
   position: relative;
   overflow: hidden;
-  display: inline-block;   /* pour que la largeur s’adapte au texte */
+  display: inline-block;   /* pour que la largeur s'adapte au texte */
   clip-path: polygon(0 0, 100% 0, calc(100% - 1rem) 100%, 0 100%);
 }
 
@@ -179,11 +179,15 @@ body {
 .cloud {
   position: absolute;
   height: auto;
-  width: 900px; /* plus lisible pour le layout horizontal */
+  width: 900px;
   opacity: 1;
-  will-change: transform, top;
-  transition: top 1s ease-out;
+  will-change: transform, top, opacity;
+  transition: top 1s ease-out, opacity 1s ease-out;
   object-fit: contain;
+}
+
+.cloud.opacity-0 {
+  opacity: 0;
 }
 
 @keyframes zoomIn {
@@ -198,10 +202,7 @@ body {
 }
 
 .zoom-in {
-
-  animation: zoomIn 0.5s ease-out forwards;
-  animation-delay: 0.5s;
-  /* tu peux ajuster duration et easing à ta convenance */
+  animation: zoomIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .cloud.minicloud {
@@ -255,3 +256,41 @@ body {
   }
 
 }
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Pour Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+}
+
+/* Pour Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 20px;
+  border: transparent;
+}
+
+@supports (scroll-behavior: smooth) {
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+}
+
