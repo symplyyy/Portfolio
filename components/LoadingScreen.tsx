@@ -45,7 +45,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
       } ${isVisible ? 'opacity-100' : 'opacity-0'}`}
     >
       <div 
-        className={`w-auto h-auto max-w-[900px] relative transition-transform duration-1000 ${
+        className={`w-auto h-auto max-w-[1200px] relative transition-transform duration-1000 ${
           isVisible ? 'scale-100' : 'scale-95'
         }`}
       >

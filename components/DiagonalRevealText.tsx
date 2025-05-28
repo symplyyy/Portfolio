@@ -35,7 +35,7 @@ export default function DiagonalRevealText({
           backgroundColor,
           clipPath: `polygon(0 ${angle * 0.8}px, 100% 0, 100% calc(100% - ${angle * 0.8}px), 0 100%)`,
         }}
-        className="absolute inset-0 flex items-center justify-center"
+        className="absolute inset-0 flex items-center justify-center md:pt-8"
       >
         <span
           className="text-white text-[1.8rem] sm:text-[2rem] md:text-[6rem] font-black whitespace-nowrap tracking-wider px-4 md:px-0"

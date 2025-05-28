@@ -171,8 +171,8 @@ export default function Navbar() {
           <div className="absolute left-1/2 transform -translate-x-1/2 mt-7 z-[100]">
             <ul className="flex gap-6 items-center">
               <li><NavLink href="#accueil">Accueil</NavLink></li>
+              <li><NavLink href="#competences">Compétences</NavLink></li>
               <li><NavLink href="#projets">Projets</NavLink></li>
-              <li><NavLink href="#competences">Competences</NavLink></li>
               <li><NavLink href="#parcours">Parcours</NavLink></li>
             </ul>
           </div>

@@ -130,15 +130,11 @@ export default function Home() {
 
       // Parallax uniquement sur les nuages (vitesses réduites)
       if (layer1Ref.current)
-        layer1Ref.current.style.transform = `translateY(${-scrollY * 0.1}px)`;
+        layer1Ref.current.style.transform = `translateY(${-scrollY * 0.15}px)`;
       if (layer2Ref.current)
-        layer2Ref.current.style.transform = `translateY(${-scrollY * 0.15}px)`;
+        layer2Ref.current.style.transform = `translateY(${-scrollY * 0.25}px)`;
       if (layer3Ref.current)
-        layer3Ref.current.style.transform = `translateY(${-scrollY * 0.2}px)`;
-
-      // Supprimer l'effet parallax sur le logo/texte
-      // if (parallaxRef.current)
-      //   parallaxRef.current.style.transform = `translateY(${scrollY * 0.1}px)`;
+        layer3Ref.current.style.transform = `translateY(${-scrollY * 0.35}px)`;
 
       cloudData.forEach((cloud) => {
         cloud.x -= cloud.speed;
@@ -196,6 +192,7 @@ export default function Home() {
             sm:h-[60rem]
             md:h-[90rem]
             w-full
+            z-[999]
             bg-center
             bg-no-repeat
             flex flex-col items-center
@@ -211,28 +208,33 @@ export default function Home() {
             position: "relative"
           }}
         >
+          {/* Grands nuages derrière */}
           <div className="clouds-container" style={{ zIndex: 1, pointerEvents: 'none' }}>
             <div ref={layer1Ref} className="clouds-layer" style={{ pointerEvents: 'none' }} />
             <div ref={layer2Ref} className="clouds-layer" style={{ pointerEvents: 'none' }} />
-            <div ref={layer3Ref} className="clouds-layer" style={{ pointerEvents: 'none' }} />
           </div>
 
           <Navbar />
 
           <div
             ref={parallaxRef}
-            className={`relative z-[50] flex flex-col justify-center items-center px-4 md:px-0 h-full md:h-auto ${
+            className={`relative z-[2] flex flex-col justify-center items-center px-4 md:px-0 h-full md:h-auto mt-20 md:mt-32 ${
               !isLoading ? 'zoom-in' : 'opacity-0 scale-50'
             }`}
           >
             <img
               src="/images/logo_portfolio.png"
               alt="Portfolio logo"
-              className="w-full max-w-[400px] sm:max-w-[600px] md:max-w-[1000px] mb-4 md:mb-0"
+              className="w-full max-w-[400px] sm:max-w-[600px] md:max-w-[1000px] mb-4 md:mb-25"
             />
             <p className="text-whiteg z-[1] relative font-artegra text-xs sm:text-sm md:text-base tracking-widest font-medium text-center">
               TIMÉO SOËTE / DÉVELOPPEUR WEB
             </p>
+          </div>
+
+          {/* Mini-clouds devant */}
+          <div className="clouds-container" style={{ zIndex: 3, pointerEvents: 'none' }}>
+            <div ref={layer3Ref} className="clouds-layer" style={{ pointerEvents: 'none' }} />
           </div>
         </header>
 
@@ -243,7 +245,7 @@ export default function Home() {
             }`} 
             style={{ position: 'relative', zIndex: 20 }}
           >
-            <div className="flex-1 space-y-2 max-w-full md:max-w-[900px] scale-[0.8] md:scale-100 origin-top">
+            <div className="flex-1 space-y-2 max-w-full md:max-w-[900px] z-[1] scale-[0.8] md:scale-100 origin-top">
               <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
                 <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
                   Je m'appelle Timéo
@@ -291,7 +293,7 @@ export default function Home() {
               />
             </div>
           </section>
-          <section className="relative py-3 mb-50 md:mb-60 overflow-x-hidden">
+          <section className="relative py-3 mb-100 md:mb-60 overflow-x-hidden">
             <div className="space-y-[-40px] sm:space-y-[-60px] md:space-y-[-120px]">
               <DiagonalRevealText 
                 text="FRONTEND & BACKEND" 
@@ -302,19 +304,19 @@ export default function Home() {
               <DiagonalRevealText 
                 text="DESIGN RESPONSIVE" 
                 backgroundColor="#E5A4E1"
-                angle={60}
+                angle={70}
                 index={1}
               />
               <DiagonalRevealText 
                 text="PERFORMANCE & SEO" 
                 backgroundColor="#5A1441"
-                angle={27}
+                angle={37}
                 index={2}
               />
               <DiagonalRevealText 
                 text="ACCESSIBILITÉ" 
                 backgroundColor="#FF9776"
-                angle={40}
+                angle={70}
                 index={3}
               />
             </div>

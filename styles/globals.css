@@ -208,6 +208,7 @@ body {
 .cloud.minicloud {
   width: 300px;
   opacity: 1;/* derrière les autres nuages */
+  z-index: 5 !important;
 }
 
 .dark {
