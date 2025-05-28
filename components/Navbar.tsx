@@ -26,25 +26,30 @@ export default function Navbar() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsInMain(entry.isIntersecting);
+        const scrollPosition = window.scrollY;
+        const headerHeight = isMobile ? 450 : 900;
+        setIsInMain(scrollPosition > headerHeight * 0.8);
       },
       {
         threshold: 0,
-        rootMargin: "-150px 0px 0px 0px"
+        rootMargin: "-100px 0px 0px 0px"
       }
     );
 
-    const mainElement = document.querySelector('main');
-    if (mainElement) {
-      observer.observe(mainElement);
-    }
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY;
+      const headerHeight = isMobile ? 450 : 900;
+      setIsInMain(scrollPosition > headerHeight * 0.8);
+    });
 
     return () => {
-      if (mainElement) {
-        observer.unobserve(mainElement);
-      }
+      window.removeEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        const headerHeight = isMobile ? 450 : 900;
+        setIsInMain(scrollPosition > headerHeight * 0.8);
+      });
     };
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     if (isOpen) {
@@ -91,7 +96,6 @@ export default function Navbar() {
     <nav 
       ref={navRef}
       style={{ 
-        backgroundColor: 'transparent',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -101,21 +105,25 @@ export default function Navbar() {
       className="w-full flex items-center justify-between px-8 py-4"
     >
       {/* Logo à gauche */}
-      <div className="relative z-10">
-        <div className="relative w-[120px] h-8 mt-7">
+      <div className={`
+        relative z-10 mt-7 px-4 py-2 rounded-2xl flex items-center
+        transition-all duration-500 ease-in-out
+        ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
+      `}>
+        <div className="relative w-[120px] h-8 flex items-center">
           <img 
             src="/images/logo_portfolio.png"
             alt="Logo clair" 
-            className={`absolute top-0 left-0 h-full w-auto transition-opacity duration-300 ease-in-out ${
-              isInMain ? 'opacity-0' : 'opacity-100'
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto transition-all duration-500 ease-in-out ${
+              isInMain ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
             }`}
             style={{ objectFit: 'contain' }}
           />
           <img 
             src="/images/logo_portfolio_black.png"
             alt="Logo sombre" 
-            className={`absolute top-0 left-0 h-full w-auto transition-opacity duration-300 ease-in-out ${
-              isInMain ? 'opacity-100' : 'opacity-0'
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto transition-all duration-500 ease-in-out ${
+              isInMain ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}
             style={{ objectFit: 'contain' }}
           />
@@ -126,24 +134,30 @@ export default function Navbar() {
       {isMobile && (
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative z-20 mt-7 w-8 h-8 flex flex-col justify-center items-center"
+          className="relative z-[999] mt-7 w-8 h-8 flex flex-col justify-center items-center"
           aria-label="Menu"
         >
-          <div className={`w-6 h-0.5 absolute transition-all duration-300 ${
-            isOpen 
-              ? 'bg-black rotate-45 translate-y-0' 
-              : isInMain ? 'bg-black' : 'bg-[#FFFFF7] translate-y-[-6px]'
-          }`} />
-          <div className={`w-6 h-0.5 absolute transition-all duration-300 ${
-            isOpen 
-              ? 'bg-black opacity-0' 
-              : isInMain ? 'bg-black' : 'bg-[#FFFFF7]'
-          }`} />
-          <div className={`w-6 h-0.5 absolute transition-all duration-300 ${
-            isOpen 
-              ? 'bg-black -rotate-45 translate-y-0' 
-              : isInMain ? 'bg-black' : 'bg-[#FFFFF7] translate-y-[6px]'
-          }`} />
+          <div 
+            className={`w-6 h-0.5 absolute transition-all duration-300 ease-in-out origin-center ${
+              isOpen 
+                ? 'rotate-45 translate-y-0 !bg-black' 
+                : `translate-y-[-6px] ${isInMain ? '!bg-black' : 'bg-white'}`
+            }`}
+          />
+          <div 
+            className={`w-6 h-0.5 absolute transition-all duration-300 ease-in-out ${
+              isOpen 
+                ? 'opacity-0 !bg-black' 
+                : `opacity-100 ${isInMain ? '!bg-black' : 'bg-white'}`
+            }`}
+          />
+          <div 
+            className={`w-6 h-0.5 absolute transition-all duration-300 ease-in-out origin-center ${
+              isOpen 
+                ? '-rotate-45 translate-y-0 !bg-black' 
+                : `translate-y-[6px] ${isInMain ? '!bg-black' : 'bg-white'}`
+            }`}
+          />
         </button>
       )}
 
@@ -155,7 +169,7 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed inset-0 bg-[#CDFB52] z-30"
+            className="fixed inset-0 bg-[#CDFB52] z-[998]"
             style={{ position: 'fixed', height: '100vh' }}
           >
             <motion.ul
@@ -179,7 +193,7 @@ export default function Navbar() {
                 >
                   <NavLink
                     href={`#${item.toLowerCase()}`}
-                    className=" hover:!text-[#5A1441]"
+                    className="text-black hover:!text-[#5A1441]"
                   >
                     {item}
                   </NavLink>
@@ -196,13 +210,13 @@ export default function Navbar() {
                   closed: { opacity: 0, y: 20 }
                 }}
               >
-                <a href="https://github.com/tonprofil" target="_blank" rel="noopener noreferrer" className=" hover:text-[#5A1441] transition-colors duration-300">
+                <a href="https://github.com/tonprofil" target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#5A1441] transition-colors duration-300">
                   <FaGithub size={32} />
                 </a>
-                <a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer" className="hover:text-[#5A1441] transition-colors duration-300">
+                <a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#5A1441] transition-colors duration-300">
                   <FaLinkedinIn size={32} />
                 </a>
-                <a href="mailto:tonemail@example.com" className="hover:text-[#5A1441] transition-colors duration-300">
+                <a href="mailto:tonemail@example.com" className="text-black hover:text-[#5A1441] transition-colors duration-300">
                   <HiOutlineMail size={32} />
                 </a>
               </motion.div>
@@ -214,7 +228,12 @@ export default function Navbar() {
       {/* Navigation Desktop */}
       {!isMobile && (
         <>
-          <div className="absolute left-1/2 transform -translate-x-1/2 mt-7 z-10">
+          <div className={`
+            absolute left-1/2 transform -translate-x-1/2 mt-7 z-10
+            px-6 py-2 rounded-2xl
+            transition-all duration-500 ease-in-out
+            ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
+          `}>
             <ul className="flex gap-6 items-center">
               {['Accueil', 'Projets', 'Competences', 'Parcours'].map((item) => (
                 <li key={item}>
@@ -229,7 +248,12 @@ export default function Navbar() {
             </ul>
           </div>
 
-          <div className="flex gap-4 items-center mt-7 z-10">
+          <div className={`
+            flex gap-4 items-center mt-7 z-10
+            px-4 py-2 rounded-2xl
+            transition-all duration-500 ease-in-out
+            ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
+          `}>
             <a 
               href="https://github.com/tonprofil" 
               target="_blank" 
