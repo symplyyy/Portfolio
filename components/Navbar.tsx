@@ -108,7 +108,7 @@ export default function Navbar() {
       <div className={`
         relative z-10 mt-7 px-4 py-2 rounded-2xl flex items-center
         transition-all duration-500 ease-in-out
-        ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
+        ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm border border-gray-800/20' : ''}
       `}>
         <div className="relative w-[120px] h-8 flex items-center">
           <img 
@@ -138,7 +138,7 @@ export default function Navbar() {
             relative z-[999] mt-7 flex flex-col justify-center items-center
             p-3 rounded-2xl
             transition-all duration-500 ease-in-out
-            ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
+            ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm border border-gray-800/20' : ''}
           `}
           aria-label="Menu"
         >
