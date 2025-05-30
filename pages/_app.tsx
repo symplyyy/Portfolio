@@ -1,4 +1,5 @@
 import "@/styles/globals.css"
+import "@/components/ScrollFloat.css"
 import type { AppProps } from "next/app"
 import { Geist, Geist_Mono } from "next/font/google"
 import SmoothScroll from "@/components/SmoothScroll"

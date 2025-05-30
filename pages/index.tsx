@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { BoxReveal } from "@/components/magicui/box-reveal";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -49,7 +50,6 @@ export default function Home() {
       const num = options?.numClouds ?? 6;
       const margin = options?.horizontalMargin ?? 300;
       const jitter = options?.jitterFactor ?? 0.3;
-      const isMobile = window.innerWidth < 768;
     
       const totalWidth = window.innerWidth + margin * 2;
       const segmentWidth = totalWidth / num;
@@ -224,10 +224,13 @@ export default function Home() {
                 !isLoading ? 'zoom-in' : 'opacity-0 scale-50'
               }`}
             >
-              <img
+              <Image
                 src="/images/logo_portfolio.png"
                 alt="Portfolio logo"
+                width={1000}
+                height={400}
                 className="w-full max-w-[400px] sm:max-w-[600px] md:max-w-[1000px] mb-4 md:mb-25"
+                priority
               />
               <p className="text-whiteg z-[1] relative font-artegra text-xs sm:text-sm md:text-base tracking-widest font-medium text-center">
                 TIMÉO SOËTE / DÉVELOPPEUR WEB
@@ -250,7 +253,7 @@ export default function Home() {
               <div className="flex-1 space-y-2 max-w-full md:max-w-[900px] z-[1] scale-[0.8] md:scale-100 origin-top">
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
                   <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
-                    Je m'appelle Timéo
+                    Je m&apos;appelle Timéo
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
@@ -280,17 +283,19 @@ export default function Home() {
                 </BoxReveal>
                 <div className="relative inline-block">
                   <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                    <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 clip-triangle-right">
-                      n'hésitez pas à explorer !
+                    <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
+                      n&apos;hésitez pas à explorer !
                     </p>
                   </BoxReveal>
                 </div>
               </div>
 
               <div className="md:ml-6 flex justify-center animate-float order-first md:order-last hidden md:flex">
-                <img
+                <Image
                   src="/images/avatar.png"
                   alt="Développeur sur un nuage"
+                  width={600}
+                  height={600}
                   className="w-[280px] md:w-[600px] max-w-full"
                 />
               </div>

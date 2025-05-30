@@ -1,4 +1,5 @@
 import NavLink from "./Navlink";
+import Image from "next/image";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { useState, useEffect, useRef } from "react";
@@ -24,30 +25,15 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const scrollPosition = window.scrollY;
-        const headerHeight = isMobile ? 450 : 900;
-        setIsInMain(scrollPosition > headerHeight * 0.8);
-      },
-      {
-        threshold: 0,
-        rootMargin: "-100px 0px 0px 0px"
-      }
-    );
-
-    window.addEventListener('scroll', () => {
+    const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const headerHeight = isMobile ? 450 : 900;
       setIsInMain(scrollPosition > headerHeight * 0.8);
-    });
+    };
 
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
-        const headerHeight = isMobile ? 450 : 900;
-        setIsInMain(scrollPosition > headerHeight * 0.8);
-      });
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [isMobile]);
 
@@ -58,39 +44,6 @@ export default function Navbar() {
       document.body.style.overflow = '';
     }
   }, [isOpen]);
-
-  const menuVariants = {
-    closed: {
-      x: "100%",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40
-      }
-    },
-    open: {
-      x: "0%",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40
-      }
-    }
-  };
-
-  const linkVariants = {
-    closed: { opacity: 0, x: 50 },
-    open: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        delay: i * 0.1,
-        type: "spring",
-        stiffness: 300,
-        damping: 30
-      }
-    })
-  };
 
   return (
     <nav 
@@ -111,17 +64,21 @@ export default function Navbar() {
         ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm border border-gray-800/20' : ''}
       `}>
         <div className="relative w-[120px] h-8 flex items-center">
-          <img 
+          <Image 
             src="/images/logo_portfolio.png"
             alt="Logo clair" 
+            width={120}
+            height={32}
             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto transition-all duration-500 ease-in-out ${
               isInMain ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
             }`}
             style={{ objectFit: 'contain' }}
           />
-          <img 
+          <Image 
             src="/images/logo_portfolio_black.png"
             alt="Logo sombre" 
+            width={120}
+            height={32}
             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto transition-all duration-500 ease-in-out ${
               isInMain ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}

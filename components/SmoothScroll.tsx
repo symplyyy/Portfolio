@@ -1,29 +1,35 @@
 import { useEffect } from 'react'
-import Lenis from '@studio-freight/lenis'
+import Lenis from 'lenis'
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    const isLowEndDevice =
+      typeof window !== 'undefined' &&
+      window.navigator.hardwareConcurrency &&
+      window.navigator.hardwareConcurrency <= 4
+
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      smoothTouch: false,
-      touchMultiplier: 2,
+      duration: isLowEndDevice ? 0.7 : 1,
+      easing: (t: number) => 1 - Math.pow(1 - t, 3), // easeOutCubic, plus rapide que easeOutQuad
+      smoothWheel: true,
+      syncTouch: false,
+      touchMultiplier: 1.5,
     })
 
-    function raf(time: number) {
+    let animationFrame: number
+
+    const raf = (time: number) => {
       lenis.raf(time)
-      requestAnimationFrame(raf)
+      animationFrame = requestAnimationFrame(raf)
     }
 
-    requestAnimationFrame(raf)
+    animationFrame = requestAnimationFrame(raf)
 
     return () => {
+      cancelAnimationFrame(animationFrame)
       lenis.destroy()
     }
   }, [])
 
   return <>{children}</>
-} 
+}
