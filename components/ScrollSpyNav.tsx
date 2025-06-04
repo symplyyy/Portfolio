@@ -178,6 +178,16 @@ export const ScrollSpyNav: React.FC<ScrollSpyNavProps> = ({ sections, isLoading 
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
+                {/* Cercle de fond */}
+                <circle
+                  cx="22"
+                  cy="22"
+                  r="20"
+                  stroke={isLight ? 'rgba(255, 255, 255, 0.2)' : 'rgba(26, 26, 26, 0.2)'}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+                {/* Cercle de progression */}
                 <motion.circle
                   cx="22"
                   cy="22"
