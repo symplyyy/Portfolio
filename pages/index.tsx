@@ -5,8 +5,17 @@ import { BoxReveal } from "@/components/magicui/box-reveal";
 import LoadingScreen from "@/components/LoadingScreen";
 import DiagonalRevealText from "@/components/DiagonalRevealText";
 import ScrollFloat from "../components/ScrollFloat";
+import { ScrollSpyNav } from "@/components/ScrollSpyNav";
 
 /* TODO : Ajout mode nuit */
+
+const sections = [
+  { id: "accueil", label: "Accueil" },
+  { id: "apropos", label: "Compétences" },
+  { id: "projets", label: "Projets" },
+  { id: "competences", label: "Expériences" },
+  { id: "contact", label: "Contact" },
+];
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -173,6 +182,7 @@ export default function Home() {
       {/* Container principal avec contexte d'empilement */}
       <div className="relative w-full min-h-screen" style={{ isolation: 'isolate' }}>
         <Navbar />
+        <ScrollSpyNav sections={sections} isLoading={isLoading} />
         
         {/* Fond de transition */}
         <div 
@@ -191,9 +201,10 @@ export default function Home() {
         )}
         <div className={`w-full transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
           <header
+            id="accueil"
             className="
               relative
-              h-[45rem]
+              h-[55rem]
               sm:h-[60rem]
               md:h-[90rem]
               w-full
@@ -245,12 +256,13 @@ export default function Home() {
 
           <main>
             <section 
+
               className={`mt-0 px-4 md:px-6 pb-0 md:pb-10 w-full mb-2 max-w-8xl mx-auto flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-0 transition-all duration-1000 delay-500 ${
                 !isLoading ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`} 
               style={{ position: 'relative', zIndex: 20 }}
             >
-              <div className="flex-1 space-y-2 max-w-full md:max-w-[900px] z-[1] scale-[0.8] md:scale-100 origin-top">
+              <div className="flex-1 space-y-3 max-w-full md:max-w-[900px] z-[1] scale-[0.8] md:scale-100 origin-top">
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
                   <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
                     Je m&apos;appelle Timéo
@@ -330,7 +342,10 @@ export default function Home() {
             </section>
 
             {/* Nouveau bloc bleu */}
-            <section className="relative bg-[#6299CE] w-full h-[80vh] -mt-40 md:-mt-60 flex items-center justify-center">
+            <section 
+              id="apropos"
+              className="relative bg-[#6299CE] w-full h-[80vh] -mt-40 md:-mt-60 mb-150 flex items-center justify-center"
+            >
               <ScrollFloat
                 containerClassName="text-white text-[1.8rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
               >

@@ -1,15 +1,24 @@
+'use client';
+
 import NavLink from "./Navlink";
 import Image from "next/image";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isInMain, setIsInMain] = useState(false);
+  const [verticalOffset, setVerticalOffset] = useState(0);
   const navRef = useRef(null);
+  const isLight = useColorScheme(isMobile, verticalOffset);
+
+  useEffect(() => {
+    setVerticalOffset(-window.innerHeight / 2 + 50);
+  }, []);
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -46,22 +55,24 @@ export default function Navbar() {
   }, [isOpen]);
 
   return (
-    <nav 
+    <motion.nav 
       ref={navRef}
       style={{ 
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
-        zIndex: 100
+        zIndex: 100,
       }}
-      className="w-full flex items-center justify-between px-8 py-4"
+      className={`w-full flex items-center justify-between px-8 py-4 ${
+        isLight ? 'text-white' : 'text-gray-800'
+      }`}
     >
       {/* Logo à gauche */}
       <div className={`
         relative z-10 mt-7 px-4 py-2 rounded-2xl flex items-center
         transition-all duration-500 ease-in-out
-        ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm border border-gray-800/20' : ''}
+        ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
       `}>
         <div className="relative w-[120px] h-8 flex items-center">
           <Image 
@@ -70,7 +81,7 @@ export default function Navbar() {
             width={120}
             height={32}
             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto transition-all duration-500 ease-in-out ${
-              isInMain ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+              isLight ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}
             style={{ objectFit: 'contain' }}
           />
@@ -80,7 +91,7 @@ export default function Navbar() {
             width={120}
             height={32}
             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto transition-all duration-500 ease-in-out ${
-              isInMain ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+              isLight ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
             }`}
             style={{ objectFit: 'contain' }}
           />
@@ -95,7 +106,7 @@ export default function Navbar() {
             relative z-[999] mt-7 flex flex-col justify-center items-center
             p-3 rounded-2xl
             transition-all duration-500 ease-in-out
-            ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm border border-gray-800/20' : ''}
+            ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
           `}
           aria-label="Menu"
         >
@@ -104,21 +115,21 @@ export default function Navbar() {
               className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out origin-center ${
                 isOpen 
                   ? 'rotate-45 translate-y-0 !bg-black' 
-                  : `translate-y-[-6px] ${isInMain ? '!bg-black' : 'bg-white'}`
+                  : `translate-y-[-6px] ${isLight ? 'bg-white' : 'bg-gray-800'}`
               }`}
             />
             <div 
               className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out ${
                 isOpen 
                   ? 'opacity-0 !bg-black' 
-                  : `opacity-100 ${isInMain ? '!bg-black' : 'bg-white'}`
+                  : `opacity-100 ${isLight ? 'bg-white' : 'bg-gray-800'}`
               }`}
             />
             <div 
               className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out origin-center ${
                 isOpen 
                   ? '-rotate-45 translate-y-0 !bg-black' 
-                  : `translate-y-[6px] ${isInMain ? '!bg-black' : 'bg-white'}`
+                  : `translate-y-[6px] ${isLight ? 'bg-white' : 'bg-gray-800'}`
               }`}
             />
           </div>
@@ -157,7 +168,7 @@ export default function Navbar() {
                 >
                   <NavLink
                     href={`#${item.toLowerCase()}`}
-                    className="text-black hover:!text-[#5A1441]"
+                    className={`${isLight ? 'text-white' : 'text-gray-800'} hover:text-[#5A1441]`}
                   >
                     {item}
                   </NavLink>
@@ -174,13 +185,13 @@ export default function Navbar() {
                   closed: { opacity: 0, y: 20 }
                 }}
               >
-                <a href="https://github.com/tonprofil" target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#5A1441] transition-colors duration-300">
+                <a href="https://github.com/tonprofil" target="_blank" rel="noopener noreferrer" className={`${isLight ? 'text-white' : 'text-gray-800'} hover:text-[#5A1441] transition-colors duration-300`}>
                   <FaGithub size={32} />
                 </a>
-                <a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#5A1441] transition-colors duration-300">
+                <a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer" className={`${isLight ? 'text-white' : 'text-gray-800'} hover:text-[#5A1441] transition-colors duration-300`}>
                   <FaLinkedinIn size={32} />
                 </a>
-                <a href="mailto:tonemail@example.com" className="text-black hover:text-[#5A1441] transition-colors duration-300">
+                <a href="mailto:tonemail@example.com" className={`${isLight ? 'text-white' : 'text-gray-800'} hover:text-[#5A1441] transition-colors duration-300`}>
                   <HiOutlineMail size={32} />
                 </a>
               </motion.div>
@@ -203,7 +214,7 @@ export default function Navbar() {
                 <li key={item}>
                   <NavLink 
                     href={`#${item.toLowerCase()}`} 
-                    className={isInMain ? 'text-black hover:!text-[#CDFB52]' : ''}
+                    className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'}`}
                   >
                     {item}
                   </NavLink>
@@ -222,7 +233,7 @@ export default function Navbar() {
               href="https://github.com/tonprofil" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className={`transition-all duration-300 ${isInMain ? 'text-black' : 'text-[#FFFFF7]'} hover:text-[#CDFB52]`}
+              className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
             >
               <FaGithub size={24} />
             </a>
@@ -230,19 +241,19 @@ export default function Navbar() {
               href="https://linkedin.com/in/tonprofil" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className={`transition-all duration-300 ${isInMain ? 'text-black' : 'text-[#FFFFF7]'} hover:text-[#CDFB52]`}
+              className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
             >
               <FaLinkedinIn size={24} />
             </a>
             <a 
               href="mailto:tonemail@example.com"
-              className={`transition-all duration-300 ${isInMain ? 'text-black' : 'text-[#FFFFF7]'} hover:text-[#CDFB52]`}
+              className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
             >
               <HiOutlineMail size={24} />
             </a>
           </div>
         </>
       )}
-    </nav>
+    </motion.nav>
   );
 }
