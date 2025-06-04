@@ -69,11 +69,7 @@ export default function Navbar() {
       }`}
     >
       {/* Logo à gauche */}
-      <div className={`
-        relative z-10 mt-7 px-4 py-2 rounded-2xl flex items-center
-        transition-all duration-500 ease-in-out
-        ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
-      `}>
+      <div className="relative z-10 mt-7">
         <div className="relative w-[120px] h-8 flex items-center">
           <Image 
             src="/images/logo_portfolio.png"
@@ -102,12 +98,7 @@ export default function Navbar() {
       {isMobile && (
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`
-            relative z-[999] mt-7 flex flex-col justify-center items-center
-            p-3 rounded-2xl
-            transition-all duration-500 ease-in-out
-            ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
-          `}
+          className="relative z-[999] mt-7"
           aria-label="Menu"
         >
           <div className="w-8 h-8 relative">
@@ -223,12 +214,7 @@ export default function Navbar() {
             </ul>
           </div>
 
-          <div className={`
-            flex gap-4 items-center mt-7 z-10
-            px-4 py-2 rounded-2xl
-            transition-all duration-500 ease-in-out
-            ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
-          `}>
+          <div className="flex gap-4 items-center mt-7 z-10">
             <a 
               href="https://github.com/tonprofil" 
               target="_blank" 
