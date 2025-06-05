@@ -11,6 +11,15 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    // Sauvegarder la position de scroll actuelle
+    const scrollPosition = window.scrollY;
+    
+    // Désactiver le scroll de manière plus robuste
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollPosition}px`;
+    document.body.style.width = '100%';
+
     // Précharger la vidéo
     if (videoRef.current) {
       videoRef.current.load();
@@ -35,7 +44,16 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
       setTimeout(onLoadingComplete, 1000);
     }, 3000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      // Restaurer le scroll et la position
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      // Restaurer la position de scroll
+      window.scrollTo(0, scrollPosition);
+    };
   }, [onLoadingComplete]);
 
   return (

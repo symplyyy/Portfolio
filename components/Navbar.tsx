@@ -105,21 +105,21 @@ export default function Navbar() {
             <div 
               className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out origin-center ${
                 isOpen 
-                  ? 'rotate-45 translate-y-0 !bg-black' 
+                  ? 'rotate-45 translate-y-0 !bg-gray-800' 
                   : `translate-y-[-6px] ${isLight ? 'bg-white' : 'bg-gray-800'}`
               }`}
             />
             <div 
               className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out ${
                 isOpen 
-                  ? 'opacity-0 !bg-black' 
+                  ? 'opacity-0 !bg-gray-800' 
                   : `opacity-100 ${isLight ? 'bg-white' : 'bg-gray-800'}`
               }`}
             />
             <div 
               className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out origin-center ${
                 isOpen 
-                  ? '-rotate-45 translate-y-0 !bg-black' 
+                  ? '-rotate-45 translate-y-0 !bg-gray-800' 
                   : `translate-y-[6px] ${isLight ? 'bg-white' : 'bg-gray-800'}`
               }`}
             />
@@ -159,7 +159,7 @@ export default function Navbar() {
                 >
                   <NavLink
                     href={`#${item.toLowerCase()}`}
-                    className={`${isLight ? 'text-white' : 'text-gray-800'} hover:text-[#5A1441]`}
+                    className="text-gray-800 hover:text-[#5A1441]"
                   >
                     {item}
                   </NavLink>
@@ -176,13 +176,13 @@ export default function Navbar() {
                   closed: { opacity: 0, y: 20 }
                 }}
               >
-                <a href="https://github.com/tonprofil" target="_blank" rel="noopener noreferrer" className={`${isLight ? 'text-white' : 'text-gray-800'} hover:text-[#5A1441] transition-colors duration-300`}>
+                <a href="https://github.com/tonprofil" target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-[#5A1441] transition-colors duration-300">
                   <FaGithub size={32} />
                 </a>
-                <a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer" className={`${isLight ? 'text-white' : 'text-gray-800'} hover:text-[#5A1441] transition-colors duration-300`}>
+                <a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-[#5A1441] transition-colors duration-300">
                   <FaLinkedinIn size={32} />
                 </a>
-                <a href="mailto:tonemail@example.com" className={`${isLight ? 'text-white' : 'text-gray-800'} hover:text-[#5A1441] transition-colors duration-300`}>
+                <a href="mailto:tonemail@example.com" className="text-gray-800 hover:text-[#5A1441] transition-colors duration-300">
                   <HiOutlineMail size={32} />
                 </a>
               </motion.div>
@@ -198,7 +198,7 @@ export default function Navbar() {
             absolute left-1/2 transform -translate-x-1/2 mt-7 z-10
             px-6 py-2 rounded-2xl
             transition-all duration-500 ease-in-out
-            ${isInMain ? 'backdrop-blur-md backdrop-saturate-150 shadow-sm' : ''}
+            backdrop-blur-md backdrop-saturate-150 shadow-sm
           `}>
             <ul className="flex gap-6 items-center">
               {['Accueil', 'Projets', 'Competences', 'Parcours'].map((item) => (

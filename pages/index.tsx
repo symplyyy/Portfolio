@@ -231,7 +231,7 @@ export default function Home() {
 
             <div
               ref={parallaxRef}
-              className={`relative z-[2] flex flex-col justify-center items-center px-4 md:px-0 h-full md:h-auto mt-20 md:mt-32 ${
+              className={`relative z-[2] flex flex-col justify-center items-center px-4 md:h-auto sm:mt-50 mt-0 md:mt-5 h-screen -mt-20 md:mt-0 ${
                 !isLoading ? 'zoom-in' : 'opacity-0 scale-50'
               }`}
             >
@@ -262,40 +262,40 @@ export default function Home() {
               }`} 
               style={{ position: 'relative', zIndex: 20 }}
             >
-              <div className="flex-1 space-y-3 max-w-full md:max-w-[900px] z-[1] scale-[0.8] md:scale-100 origin-top">
+              <div className="flex-1 space-y-2 max-w-full md:max-w-[800px] z-[1] scale-[0.8] md:scale-100 origin-top">
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     Je m&apos;appelle Timéo
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     je donne vie aux idées sur le web.
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     Entre lignes de code et pixels bien
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     placés je conçois des sites modernes,
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     dynamiques et accessibles.
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     Ce portfolio est ma vitrine,
                   </p>
                 </BoxReveal>
                 <div className="relative inline-block">
                   <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                    <p className="bg-black text-white text-lg md:text-4xl font-bold px-4 pr-8 md:pr-12 py-2 md:py-3 inline-block clip-triangle-right">
+                    <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                       n&apos;hésitez pas à explorer !
                     </p>
                   </BoxReveal>
@@ -308,7 +308,7 @@ export default function Home() {
                   alt="Développeur sur un nuage"
                   width={600}
                   height={600}
-                  className="w-[280px] md:w-[600px] max-w-full"
+                  className="w-[280px] md:w-[500px] max-w-full"
                 />
               </div>
             </section>
