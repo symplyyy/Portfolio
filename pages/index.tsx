@@ -11,10 +11,9 @@ import { ScrollSpyNav } from "@/components/ScrollSpyNav";
 
 const sections = [
   { id: "accueil", label: "Accueil" },
-  { id: "apropos", label: "Compétences" },
+  { id: "competences", label: "Compétences" },
   { id: "projets", label: "Projets" },
-  { id: "competences", label: "Expériences" },
-  { id: "contact", label: "Contact" },
+  { id: "parcours", label: "Parcours" },
 ];
 
 export default function Home() {
@@ -343,7 +342,7 @@ export default function Home() {
 
             {/* Nouveau bloc bleu */}
             <section 
-              id="apropos"
+              id="competences"
               className="relative bg-[#6299CE] w-full h-[80vh] -mt-40 md:-mt-60 mb-150 flex items-center justify-center"
             >
               <ScrollFloat

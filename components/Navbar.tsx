@@ -201,7 +201,7 @@ export default function Navbar() {
             backdrop-blur-md backdrop-saturate-150 shadow-sm
           `}>
             <ul className="flex gap-6 items-center">
-              {['Accueil', 'Projets', 'Competences', 'Parcours'].map((item) => (
+              {['Accueil', 'Compétences', 'Projets',  'Parcours'].map((item) => (
                 <li key={item}>
                   <NavLink 
                     href={`#${item.toLowerCase()}`} 
