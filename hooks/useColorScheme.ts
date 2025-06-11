@@ -5,28 +5,16 @@ export const useColorScheme = (isMobile: boolean, verticalOffset: number = 0) =>
 
   useEffect(() => {
     const checkSection = () => {
-      const scrollPosition = window.scrollY;
-      const headerHeight = isMobile ? 450 : 900;
-      const isInMain = scrollPosition > headerHeight * 0.8;
-
-      const boxReveal = document.querySelector('.clip-triangle-right');
-      const diagonalSection = document.querySelector('.relative.py-3.overflow-x-hidden');
+      const diagonalSection = document.getElementById('diagonal-section');
       
-      if (boxReveal && diagonalSection) {
-        const boxRevealRect = boxReveal.getBoundingClientRect();
-        const diagonalSectionRect = diagonalSection.getBoundingClientRect();
-        const viewportPosition = window.innerHeight / 2 + verticalOffset;
+      if (diagonalSection) {
+        const sectionRect = diagonalSection.getBoundingClientRect();
+        const navbarHeight = 80; // Hauteur approximative de la navbar
 
-        // Si on est dans la section diagonale, on est en blanc
-        if (diagonalSectionRect.top <= viewportPosition) {
-          setIsLight(true);
-        }
-        // Si on est après la BoxReveal mais avant la section diagonale, on est en noir
-        else if (boxRevealRect.top <= viewportPosition || isInMain) {
+        // On change la couleur quand la navbar atteint le bas de la section
+        if (sectionRect.bottom <= navbarHeight + 100) { // Ajout d'une marge de 100px pour déclencher plus tôt
           setIsLight(false);
-        }
-        // Au début, on est en blanc
-        else {
+        } else {
           setIsLight(true);
         }
       }

@@ -6,6 +6,8 @@ import LoadingScreen from "@/components/LoadingScreen";
 import DiagonalRevealText from "@/components/DiagonalRevealText";
 import ScrollFloat from "../components/ScrollFloat";
 import { ScrollSpyNav } from "@/components/ScrollSpyNav";
+import RevealOnScroll from "../components/RevealOnScroll";
+import SkillCard from "../components/SkillCard";
 
 /* TODO : Ajout mode nuit */
 
@@ -16,12 +18,14 @@ const sections = [
   { id: "parcours", label: "Parcours" },
 ];
 
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const layer1Ref = useRef<HTMLDivElement>(null);
   const layer2Ref = useRef<HTMLDivElement>(null);
   const layer3Ref = useRef<HTMLDivElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     if ("scrollRestoration" in history) {
@@ -311,7 +315,7 @@ export default function Home() {
                 />
               </div>
             </section>
-            <section className="relative py-3 overflow-x-hidden">
+            <section className="relative py-3 overflow-x-hidden" id="diagonal-section">
               <div className="space-y-[-40px] sm:space-y-[-60px] md:space-y-[-120px]">
                 <DiagonalRevealText 
                   text="FRONTEND & BACKEND" 
@@ -343,13 +347,77 @@ export default function Home() {
             {/* Nouveau bloc bleu */}
             <section 
               id="competences"
-              className="relative bg-[#6299CE] w-full h-[80vh] -mt-40 md:-mt-60 mb-150 flex items-center justify-center"
+              className="relative w-full h-auto -mt-40 md:-mt-60 mb-150 flex items-center justify-center flex-col pt-[15rem]"
             >
-              <ScrollFloat
-                containerClassName="text-white text-[1.8rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
-              >
-                COMPÉTENCES
-              </ScrollFloat>
+              <div className="relative mb-16">
+                <ScrollFloat
+                  containerClassName="text-[#6299CE] text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                >
+                  COMPÉTENCES
+                </ScrollFloat>
+              </div>
+              <div className="relative z-10 bg-[#6299CE]/80 backdrop-blur-sm rounded-full px-8 py-3 shadow-lg mb-2">
+                <p className="text-white text-center text-lg md:text-xl font-medium">
+                  Chaque carte détaille mes compétences clés.
+                </p>
+              </div>
+              
+              {/* Cartes de compétences */}
+              <div className="relative z-10 w-[70%] mx-auto px-4 md:px-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                  
+                  <RevealOnScroll delay={0}>
+                    <SkillCard
+                      title="Frontend"
+                      description="Création d&apos;interfaces utilisateur modernes et réactives avec les dernières technologies web."
+                      iconSvg={(
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      )}
+                      technologies={["React", "Next.js", "TypeScript", "JavaScript", "TailwindCSS", "Bootstrap"]}
+                      gradientFrom="from-blue-500"
+                      gradientTo="to-purple-600"
+                      tagBgColor="bg-blue-500"
+                      tagBorderColor="border-blue-500"
+                    />
+                  </RevealOnScroll>
+
+                  <RevealOnScroll delay={150}>
+                    <SkillCard
+                      title="Backend"
+                      description="Développement d'applications serveur avec PHP et Node.js, gestion de bases de données relationnelles."
+                      iconSvg={(
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                        </svg>
+                      )}
+                      technologies={["C#", "PHP", "Laravel", "Symfony", "Node.js", "PostgreSQL"]}
+                      gradientFrom="from-green-500"
+                      gradientTo="to-teal-600"
+                      tagBgColor="bg-green-500"
+                      tagBorderColor="border-green-500"
+                    />
+                  </RevealOnScroll>
+
+                  <RevealOnScroll delay={300}>
+                    <SkillCard
+                      title="Autre"
+                      description="Maîtrise des outils de design, de gestion de version et de développement de jeux pour des projets créatifs complets."
+                      iconSvg={(
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      )}
+                      technologies={["Git", "Unity", "Photoshop", "Illustrator", "Figma", "Vercel"]}
+                      gradientFrom="from-orange-500"
+                      gradientTo="to-red-600"
+                      tagBgColor="bg-orange-500"
+                      tagBorderColor="border-orange-500"
+                    />
+                  </RevealOnScroll>
+                </div>
+              </div>
             </section>
           </main>
         </div>
