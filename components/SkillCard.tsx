@@ -10,6 +10,7 @@ interface SkillCardProps {
   gradientTo: string;
   tagBgColor: string;
   tagBorderColor: string;
+  hideDescriptionOnMobile?: boolean;
 }
 
 const SkillCard: React.FC<SkillCardProps> = ({
@@ -21,6 +22,7 @@ const SkillCard: React.FC<SkillCardProps> = ({
   gradientTo,
   tagBgColor,
   tagBorderColor,
+  hideDescriptionOnMobile = false
 }) => {
   return (
     <CardContainer className="inter-var">
@@ -43,7 +45,7 @@ const SkillCard: React.FC<SkillCardProps> = ({
               ))}
             </div>
             
-            <p className="text-white text-base leading-relaxed font-medium opacity-95">
+            <p className={`text-white text-base leading-relaxed font-medium opacity-95 ${hideDescriptionOnMobile ? 'hidden sm:block' : ''}`}>
               {description}
             </p>
           </CardItem>

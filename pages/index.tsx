@@ -347,31 +347,33 @@ export default function Home() {
             {/* Nouveau bloc bleu */}
             <section 
               id="competences"
-              className="relative w-full h-auto -mt-40 md:-mt-60 mb-150 flex items-center justify-center flex-col pt-[15rem]"
+              className="relative w-full h-auto -mt-40 md:-mt-60 flex items-center justify-center flex-col pt-[5rem] md:pt-[15rem]"
             >
-              <div className="relative mb-16">
+              <div className="relative mb-4 md:mb-16">
                 <ScrollFloat
-                  containerClassName="text-[#6299CE] text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                  containerClassName="text-[#6299CE] text-[1.8rem] pb-[0.5rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
                 >
                   COMPÉTENCES
                 </ScrollFloat>
               </div>
-              <div className="relative z-10 bg-[#6299CE]/80 backdrop-blur-sm rounded-full px-8 py-3 shadow-lg mb-2">
+              
+              <div className="relative z-10 bg-[#6299CE]/80 backdrop-blur-sm rounded-full px-8 py-2 md:py-3 shadow-lg mb-4 md:mb-16">
                 <p className="text-white text-center text-lg md:text-xl font-medium">
                   Chaque carte détaille mes compétences clés.
                 </p>
               </div>
               
               {/* Cartes de compétences */}
-              <div className="relative z-10 w-[70%] mx-auto px-4 md:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+              <div className="relative z-10 w-[95%] sm:w-[85%] lg:w-[80%] mx-auto px-2 sm:px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
                   
-                  <RevealOnScroll delay={0}>
+                  <RevealOnScroll delay={0} className="w-full">
                     <SkillCard
                       title="Frontend"
-                      description="Création d&apos;interfaces utilisateur modernes et réactives avec les dernières technologies web."
+                      description="Création d'interfaces utilisateur modernes et réactives avec les dernières technologies web."
+                      hideDescriptionOnMobile={true}
                       iconSvg={(
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-6 sm:w-8 h-6 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                       )}
@@ -383,12 +385,13 @@ export default function Home() {
                     />
                   </RevealOnScroll>
 
-                  <RevealOnScroll delay={150}>
+                  <RevealOnScroll delay={150} className="w-full">
                     <SkillCard
                       title="Backend"
                       description="Développement d'applications serveur avec PHP et Node.js, gestion de bases de données relationnelles."
+                      hideDescriptionOnMobile={true}
                       iconSvg={(
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-6 sm:w-8 h-6 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
                         </svg>
                       )}
@@ -400,16 +403,17 @@ export default function Home() {
                     />
                   </RevealOnScroll>
 
-                  <RevealOnScroll delay={300}>
+                  <RevealOnScroll delay={300} className="w-full md:col-span-2 lg:col-span-1">
                     <SkillCard
                       title="Autre"
                       description="Maîtrise des outils de design, de gestion de version et de développement de jeux pour des projets créatifs complets."
+                      hideDescriptionOnMobile={true}
                       iconSvg={(
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-6 sm:w-8 h-6 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                       )}
-                      technologies={["Git", "Unity", "Photoshop", "Illustrator", "Figma", "Vercel"]}
+                      technologies={["Git", "Unity", "WordPress", "Photoshop", "Illustrator", "Figma"]}
                       gradientFrom="from-orange-500"
                       gradientTo="to-red-600"
                       tagBgColor="bg-orange-500"
@@ -419,6 +423,34 @@ export default function Home() {
                 </div>
               </div>
             </section>
+
+            {/* Section Projets */}
+            <section 
+              id="projets"
+              className="relative w-full min-h-screen flex items-center justify-center flex-col pt-8 pb-20"
+            >
+              <div className="relative mb-16">
+                <ScrollFloat
+                  containerClassName="text-[#FF9776] text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                >
+                  PROJETS
+                </ScrollFloat>
+              </div>
+              
+              <div className="relative z-10 bg-[#FF9776]/80 backdrop-blur-sm rounded-full px-8 py-3 shadow-lg mb-16">
+                <p className="text-white text-center text-lg md:text-xl font-medium">
+                  Découvrez mes réalisations les plus récentes
+                </p>
+              </div>
+
+              {/* Container pour la grille de projets */}
+              <div className="relative z-10 w-[85%] mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {/* Vous pourrez ajouter vos projets ici */}
+                </div>
+              </div>
+            </section>
+
           </main>
         </div>
       </div>
