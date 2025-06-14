@@ -380,8 +380,6 @@ export default function Home() {
                       technologies={["React", "Next.js", "TypeScript", "JavaScript", "TailwindCSS", "Bootstrap"]}
                       gradientFrom="from-blue-500"
                       gradientTo="to-purple-600"
-                      tagBgColor="bg-blue-500"
-                      tagBorderColor="border-blue-500"
                     />
                   </RevealOnScroll>
 
@@ -398,8 +396,6 @@ export default function Home() {
                       technologies={["C#", "PHP", "Laravel", "Symfony", "Node.js", "PostgreSQL"]}
                       gradientFrom="from-green-500"
                       gradientTo="to-teal-600"
-                      tagBgColor="bg-green-500"
-                      tagBorderColor="border-green-500"
                     />
                   </RevealOnScroll>
 
@@ -416,8 +412,6 @@ export default function Home() {
                       technologies={["Git", "Unity", "WordPress", "Photoshop", "Illustrator", "Figma"]}
                       gradientFrom="from-orange-500"
                       gradientTo="to-red-600"
-                      tagBgColor="bg-orange-500"
-                      tagBorderColor="border-orange-500"
                     />
                   </RevealOnScroll>
                 </div>

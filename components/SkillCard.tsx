@@ -8,8 +8,6 @@ interface SkillCardProps {
   technologies: string[];
   gradientFrom: string;
   gradientTo: string;
-  tagBgColor: string;
-  tagBorderColor: string;
   hideDescriptionOnMobile?: boolean;
 }
 
@@ -20,17 +18,14 @@ const SkillCard: React.FC<SkillCardProps> = ({
   technologies,
   gradientFrom,
   gradientTo,
-  tagBgColor,
-  tagBorderColor,
   hideDescriptionOnMobile = false
 }) => {
   return (
     <CardContainer className="inter-var">
-      <CardBody className={`relative bg-gradient-to-br ${gradientFrom}/30 ${gradientTo}/30 backdrop-blur-md rounded-3xl p-8 md:p-10 transition-all duration-300 ease-in-out min-h-[400px] w-full`}>
-
+      <CardBody className={`relative bg-gradient-to-br ${gradientFrom} ${gradientTo} rounded-3xl p-8 md:p-10 transition-all duration-300 ease-in-out min-h-[400px] w-full`}>
         <div className="relative z-10 h-full flex flex-col">
           <CardItem translateZ={60} className="flex items-center mb-8">
-            <div className={`w-16 h-16 bg-gradient-to-br ${gradientFrom} ${gradientTo} rounded-2xl flex items-center justify-center mr-5 shadow-lg`}>
+            <div className={`w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mr-5 shadow-lg`}>
               {iconSvg}
             </div>
             <h3 className="text-3xl md:text-4xl font-bold text-white">{title}</h3>
@@ -39,13 +34,13 @@ const SkillCard: React.FC<SkillCardProps> = ({
           <CardItem translateZ={70} className="space-y-6 flex-1">
             <div className="flex flex-wrap gap-3">
               {technologies.map((tech, index) => (
-                <CardItem key={index} translateZ={index * 10 + 30} className={`px-4 py-2 ${tagBgColor}/40 text-white rounded-xl text-base font-semibold border-2 ${tagBorderColor}/60 shadow-md backdrop-blur-sm`}>
+                <CardItem key={index} translateZ={index * 10 + 30} className={`px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-xl text-base font-semibold border-2 border-white/30 shadow-md`}>
                   {tech}
                 </CardItem>
               ))}
             </div>
             
-            <p className={`text-white text-base leading-relaxed font-medium opacity-95 ${hideDescriptionOnMobile ? 'hidden sm:block' : ''}`}>
+            <p className={`text-white text-base leading-relaxed font-medium ${hideDescriptionOnMobile ? 'hidden sm:block' : ''}`}>
               {description}
             </p>
           </CardItem>
