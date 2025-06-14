@@ -20,7 +20,7 @@ export const ScrollSpyNav: React.FC<ScrollSpyNavProps> = ({ sections, isLoading 
   const [isMobile, setIsMobile] = useState(false);
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
-  const isLight = useColorScheme(isMobile);
+  const { isScrollSpyLight } = useColorScheme();
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -162,10 +162,10 @@ export const ScrollSpyNav: React.FC<ScrollSpyNavProps> = ({ sections, isLoading 
           <div className="relative cursor-pointer">
             <motion.div
               className={`w-[10px] h-[10px] rounded-full border-2 transition-colors duration-300 ${
-                isLight ? 'border-white' : 'border-gray-800'
+                isScrollSpyLight ? 'border-white' : 'border-gray-800'
               } ${
                 activeSection === id 
-                  ? isLight ? 'bg-white' : 'bg-gray-800'
+                  ? isScrollSpyLight ? 'bg-white' : 'bg-gray-800'
                   : 'bg-transparent'
               }`}
               whileHover={{ scale: 1.2 }}
@@ -183,7 +183,7 @@ export const ScrollSpyNav: React.FC<ScrollSpyNavProps> = ({ sections, isLoading 
                   cx="22"
                   cy="22"
                   r="20"
-                  stroke={isLight ? 'rgba(255, 255, 255, 0.2)' : 'rgba(26, 26, 26, 0.2)'}
+                  stroke={isScrollSpyLight ? 'rgba(255, 255, 255, 0.2)' : 'rgba(26, 26, 26, 0.2)'}
                   strokeWidth="2"
                   strokeLinecap="round"
                 />
@@ -192,7 +192,7 @@ export const ScrollSpyNav: React.FC<ScrollSpyNavProps> = ({ sections, isLoading 
                   cx="22"
                   cy="22"
                   r="20"
-                  stroke={isLight ? 'white' : '#1a1a1a'}
+                  stroke={isScrollSpyLight ? 'white' : '#1a1a1a'}
                   strokeWidth="2"
                   strokeLinecap="round"
                   initial={{ pathLength: 0 }}
@@ -218,8 +218,8 @@ export const ScrollSpyNav: React.FC<ScrollSpyNavProps> = ({ sections, isLoading 
                 transition={{ duration: 0.2 }}
                 className={`absolute left-8 ml-2 px-4 py-1.5 rounded-full text-sm backdrop-blur-sm
                   transition-colors duration-300
-                  ${isLight ? 'text-white bg-white/10' : 'text-gray-800 bg-gray-800/10'}
-                  border ${isLight ? 'border-white/20' : 'border-gray-800/20'}`}
+                  ${isScrollSpyLight ? 'text-white bg-white/10' : 'text-gray-800 bg-gray-800/10'}
+                  border ${isScrollSpyLight ? 'border-white/20' : 'border-gray-800/20'}`}
               >
                 {label}
               </motion.span>

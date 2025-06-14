@@ -1,29 +1,55 @@
 import { useState, useEffect } from 'react';
 
-export const useColorScheme = (isMobile: boolean, verticalOffset: number = 0) => {
-  const [isLight, setIsLight] = useState(true);
+interface ColorScheme {
+  isNavbarLight: boolean;
+  isScrollSpyLight: boolean;
+}
+
+export const useColorScheme = () => {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>({
+    isNavbarLight: true,
+    isScrollSpyLight: true
+  });
 
   useEffect(() => {
-    const checkSection = () => {
-      const diagonalSection = document.getElementById('diagonal-section');
-      
-      if (diagonalSection) {
-        const sectionRect = diagonalSection.getBoundingClientRect();
-        const navbarHeight = 80; // Hauteur approximative de la navbar
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const viewportHeight = window.innerHeight;
 
-        // On change la couleur quand la navbar atteint le bas de la section
-        if (sectionRect.bottom <= navbarHeight + 100) { // Ajout d'une marge de 100px pour déclencher plus tôt
-          setIsLight(false);
-        } else {
-          setIsLight(true);
-        }
-      }
+      // Points de changement (à ajuster selon vos besoins)
+      const presentationSection = document.querySelector('.flex-1.space-y-2');
+      const diagonalSection = document.getElementById('diagonal-section');
+      const competencesSection = document.getElementById('competences');
+
+      if (!presentationSection || !diagonalSection || !competencesSection) return;
+
+      const presentationTop = presentationSection.getBoundingClientRect().top + window.scrollY;
+      const diagonalTop = diagonalSection.getBoundingClientRect().top + window.scrollY;
+      const competencesTop = competencesSection.getBoundingClientRect().top + window.scrollY;
+
+      // Logique pour la Navbar
+      const isNavbarLight = 
+        scrollPosition < (presentationTop - viewportHeight * 0.5) || // Blanc en haut
+        (scrollPosition >= (diagonalTop - viewportHeight * 0.3) && // Blanc dans diagonal-section
+         scrollPosition < (competencesTop - viewportHeight * 0.3));
+
+      // Logique pour la ScrollSpyNav
+      const isScrollSpyLight = 
+        scrollPosition < (presentationTop - viewportHeight * 0.5) || // Blanc en haut
+        (scrollPosition >= (diagonalTop - viewportHeight * 0.3) && // Blanc dans diagonal-section
+         scrollPosition < (competencesTop - viewportHeight * 0.3));
+
+      setColorScheme({
+        isNavbarLight,
+        isScrollSpyLight
+      });
     };
 
-    checkSection();
-    window.addEventListener('scroll', checkSection);
-    return () => window.removeEventListener('scroll', checkSection);
-  }, [isMobile, verticalOffset]);
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Vérifier l'état initial
 
-  return isLight;
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return colorScheme;
 }; 

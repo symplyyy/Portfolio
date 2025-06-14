@@ -14,7 +14,7 @@ export default function Navbar() {
   const [isInMain, setIsInMain] = useState(false);
   const [verticalOffset, setVerticalOffset] = useState(0);
   const navRef = useRef(null);
-  const isLight = useColorScheme(isMobile, verticalOffset);
+  const { isNavbarLight } = useColorScheme();
 
   useEffect(() => {
     setVerticalOffset(-window.innerHeight / 2 + 50);
@@ -65,7 +65,7 @@ export default function Navbar() {
         zIndex: 100,
       }}
       className={`w-full flex items-center justify-between px-8 py-4 ${
-        isLight ? 'text-white' : 'text-gray-800'
+        isNavbarLight ? 'text-white' : 'text-gray-800'
       }`}
     >
       {/* Logo à gauche */}
@@ -77,7 +77,7 @@ export default function Navbar() {
             width={120}
             height={32}
             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto transition-all duration-500 ease-in-out ${
-              isLight ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+              isNavbarLight ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}
             style={{ objectFit: 'contain' }}
           />
@@ -87,7 +87,7 @@ export default function Navbar() {
             width={120}
             height={32}
             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto transition-all duration-500 ease-in-out ${
-              isLight ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+              isNavbarLight ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
             }`}
             style={{ objectFit: 'contain' }}
           />
@@ -106,21 +106,21 @@ export default function Navbar() {
               className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out origin-center ${
                 isOpen 
                   ? 'rotate-45 translate-y-0 !bg-gray-800' 
-                  : `translate-y-[-6px] ${isLight ? 'bg-white' : 'bg-gray-800'}`
+                  : `translate-y-[-6px] ${isNavbarLight ? 'bg-white' : 'bg-gray-800'}`
               }`}
             />
             <div 
               className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out ${
                 isOpen 
                   ? 'opacity-0 !bg-gray-800' 
-                  : `opacity-100 ${isLight ? 'bg-white' : 'bg-gray-800'}`
+                  : `opacity-100 ${isNavbarLight ? 'bg-white' : 'bg-gray-800'}`
               }`}
             />
             <div 
               className={`w-6 h-0.5 absolute top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out origin-center ${
                 isOpen 
                   ? '-rotate-45 translate-y-0 !bg-gray-800' 
-                  : `translate-y-[6px] ${isLight ? 'bg-white' : 'bg-gray-800'}`
+                  : `translate-y-[6px] ${isNavbarLight ? 'bg-white' : 'bg-gray-800'}`
               }`}
             />
           </div>
@@ -205,7 +205,7 @@ export default function Navbar() {
                 <li key={item}>
                   <NavLink 
                     href={`#${item.toLowerCase()}`} 
-                    className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'}`}
+                    className={`${isNavbarLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'}`}
                   >
                     {item}
                   </NavLink>
@@ -219,7 +219,7 @@ export default function Navbar() {
               href="https://github.com/tonprofil" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
+              className={`${isNavbarLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
             >
               <FaGithub size={24} />
             </a>
@@ -227,13 +227,13 @@ export default function Navbar() {
               href="https://linkedin.com/in/tonprofil" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
+              className={`${isNavbarLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
             >
               <FaLinkedinIn size={24} />
             </a>
             <a 
               href="mailto:tonemail@example.com"
-              className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
+              className={`${isNavbarLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
             >
               <HiOutlineMail size={24} />
             </a>

@@ -345,71 +345,70 @@ export default function Home() {
             </section>
 
             {/* Nouveau bloc bleu */}
-            <section 
+            <section
               id="competences"
-              className="relative w-full h-auto -mt-40 md:-mt-60 flex items-center justify-center flex-col pt-[5rem] md:pt-[15rem]"
+              className="relative w-[80%] m-auto h-auto  -mt-10 sm:-mt-24 md:-mt-40 lg:-mt-60 flex items-center justify-center flex-col pt-[2rem] sm:pt-[3rem] md:pt-[5rem] lg:pt-[15rem]"
             >
-              <div className="relative mb-4 md:mb-16">
+              <div className="relative mb-2 sm:mb-6 md:mb-16">
                 <ScrollFloat
-                  containerClassName="text-[#6299CE] text-[1.8rem] pb-[0.5rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                  containerClassName="text-[#6299CE] text-[1.5rem] sm:text-[1.8rem] md:text-[2rem] lg:text-[6rem] font-black tracking-wider translate-y-4 sm:translate-y-10 md:translate-y-20"
                 >
                   COMPÉTENCES
                 </ScrollFloat>
               </div>
               
-              <div className="relative z-10 bg-[#6299CE]/80 backdrop-blur-sm rounded-full px-8 py-2 md:py-3 shadow-lg mb-4 md:mb-16">
-                <p className="text-white text-center text-lg md:text-xl font-medium">
+              <div className="relative z-10 bg-[#6299CE]/80 backdrop-blur-sm rounded-full px-4 sm:px-6 md:px-8 py-1.5 sm:py-2 md:py-3 shadow-lg mb-2 sm:mb-6 md:mb-16">
+                <p className="text-white text-center text-base sm:text-lg md:text-xl font-medium">
                   Chaque carte détaille mes compétences clés.
                 </p>
               </div>
               
               {/* Cartes de compétences */}
-              <div className="relative z-10 w-[95%] sm:w-[85%] lg:w-[80%] mx-auto px-2 sm:px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
-                  
+              <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-8">
                   <RevealOnScroll delay={0} className="w-full">
                     <SkillCard
                       title="Frontend"
                       description="Création d'interfaces utilisateur modernes et réactives avec les dernières technologies web."
                       hideDescriptionOnMobile={true}
                       iconSvg={(
-                        <svg className="w-6 sm:w-8 h-6 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                       )}
-                      technologies={["React", "Next.js", "TypeScript", "JavaScript", "TailwindCSS", "Bootstrap"]}
+                      technologies={["React", "Next.js", "TypeScript", "JavaScript", "TailwindCSS", "Bootstrap", "Three.js", "Flutter"]}
                       gradientFrom="from-blue-500"
                       gradientTo="to-purple-600"
                     />
                   </RevealOnScroll>
 
-                  <RevealOnScroll delay={150} className="w-full">
+                  <RevealOnScroll delay={100} className="w-full">
                     <SkillCard
                       title="Backend"
                       description="Développement d'applications serveur avec PHP et Node.js, gestion de bases de données relationnelles."
                       hideDescriptionOnMobile={true}
                       iconSvg={(
-                        <svg className="w-6 sm:w-8 h-6 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
                         </svg>
                       )}
-                      technologies={["C#", "PHP", "Laravel", "Symfony", "Node.js", "PostgreSQL"]}
+                      technologies={["C#", "PHP", "Laravel", "Twig", "Symfony", "PostgreSQL", "MySQL"]}
                       gradientFrom="from-green-500"
                       gradientTo="to-teal-600"
                     />
                   </RevealOnScroll>
 
-                  <RevealOnScroll delay={300} className="w-full md:col-span-2 lg:col-span-1">
+                  <RevealOnScroll delay={200} className="w-full">
                     <SkillCard
                       title="Autre"
                       description="Maîtrise des outils de design, de gestion de version et de développement de jeux pour des projets créatifs complets."
                       hideDescriptionOnMobile={true}
                       iconSvg={(
-                        <svg className="w-6 sm:w-8 h-6 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                       )}
-                      technologies={["Git", "Unity", "WordPress", "Photoshop", "Illustrator", "Figma"]}
+                      technologies={["Git", "Unity", "WordPress", "Photoshop", "Illustrator", "Figma", "Blender"]}
                       gradientFrom="from-orange-500"
                       gradientTo="to-red-600"
                     />
