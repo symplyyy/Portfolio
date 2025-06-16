@@ -8,6 +8,7 @@ import ScrollFloat from "../components/ScrollFloat";
 import { ScrollSpyNav } from "@/components/ScrollSpyNav";
 import RevealOnScroll from "../components/RevealOnScroll";
 import SkillCard from "../components/SkillCard";
+import ProjectCard from "@/components/ProjectCard";
 
 /* TODO : Ajout mode nuit */
 
@@ -18,6 +19,53 @@ const sections = [
   { id: "parcours", label: "Parcours" },
 ];
 
+const projects = [
+  {
+    title: "Application web de gestion de projets et cartographie interactive pour un laboratoire",
+    description: "Plateforme web permettant de gérer les projets d'un laboratoire et de visualiser ses relations internationales à travers une carte interactive.",
+    imageUrl: "/images/projects/labo.png",
+    projectUrl: "",
+    technologies: ["Symfony", "PostgreSQL", "Bootstrap"]
+  },
+  {
+    title: "Terracorsica",
+    description: "Site web proposant des parcours de randonnée en Corse (GR20).",
+    imageUrl: "/images/projects/terracorsica.png",
+    projectUrl: "https://terracorsica.akifi.etu.mmi-unistra.fr/",
+    technologies: ["Symfony", "MySQL", "API Google Maps"]
+  },
+  {
+    title: "Statify",
+    description: "Application web permettant de visualiser les statistiques de son compte Spotify.",
+    imageUrl: "/images/projects/spotify.png",
+    projectUrl: "https://statify.soete.etu.mmi-unistra.fr/",
+    technologies: ["Javascript", "API Spotify", "D3.js"]
+  },
+  {
+    title: "Application de suivi de consommation énergétique",
+    description: "Application web permettant de suivre la consommation énergétique de l'IUT de Haguenau.",
+    imageUrl: "/images/projects/conso.png",
+    projectUrl: "https://sae501.mehr.soete.etu.mmi-unistra.fr/",
+    technologies: ["Laravel", "Chart.js", "TailwindCSS", "MySQL", "Python"]
+  },
+
+  {
+    title: "Plugin mode de jeu 'Invisible' CS2",
+    description: "Plugin permettant d'implémenter un mode jeu se basant sur l'invisibilité dans Counter-Strike 2 sur serveur dédié.",
+    imageUrl: "/images/projects/conso.png",
+    projectUrl: "https://github.com/symplyyy/InvisiblePluginCS2",
+    technologies: ["C#"]
+  },
+
+  {
+    title: "Application web de suivi des vols en direct",
+    description: "Application web permettant de visualiser les vols en direct à travers le monde.",
+    imageUrl: "/images/projects/globe.png",
+    projectUrl: "",
+    technologies: ["Javascript", "D3.js", "Opensky Network API"]
+  }
+
+];
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -347,7 +395,7 @@ export default function Home() {
             {/* Nouveau bloc bleu */}
             <section 
               id="competences"
-              className="relative blackskin w-full h-auto -mt-40 md:-mt-60 flex items-center justify-center flex-col pt-[5rem] md:pt-[15rem]"
+              className="relative blackskin w-full h-auto -mt-40 md:-mt-60 flex items-center justify-center flex-col pt-[5rem] md:pt-[15rem] pb-30"
             >
               <div className="relative mb-4 md:mb-16">
                 <ScrollFloat
@@ -421,26 +469,56 @@ export default function Home() {
             {/* Section Projets */}
             <section 
               id="projets"
-              className="relative w-full min-h-screen flex items-center justify-center flex-col pt-8 pb-20"
+              className="relative w-full blackskin flex items-center whiteskin justify-center flex-col pt-5 md:pt-5 pb-80 animate-slideUp"
+              style={{
+                animation: 'slideUp 1s ease-out forwards',
+                opacity: 0,
+                transform: 'translateY(100px)',
+                clipPath: 'polygon(0 4%, 100% 0%, 100% 93%, 0% 100%)'
+              }}
             >
+              <style jsx>{`
+                @keyframes slideUp {
+                  0% {
+                    opacity: 0;
+                    transform: translateY(100px);
+                  }
+                  100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
+              `}</style>
               <div className="relative mb-16">
                 <ScrollFloat
-                  containerClassName="text-[#FF9776] text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                  containerClassName="text-[#2C3E50] text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
                 >
                   PROJETS
                 </ScrollFloat>
               </div>
               
-              <div className="relative z-10 bg-[#FF9776]/80 backdrop-blur-sm rounded-full px-8 py-3 shadow-lg mb-16">
+              <div className="relative z-10 bg-[#5C97CE] backdrop-blur-sm rounded-full px-8 py-3 shadow-lg mb-16">
                 <p className="text-white text-center text-lg md:text-xl font-medium">
                   Découvrez mes réalisations les plus récentes
                 </p>
               </div>
 
               {/* Container pour la grille de projets */}
-              <div className="relative z-10 w-[85%] mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {/* Vous pourrez ajouter vos projets ici */}
+              <div className="relative z-10 w-[80%] mx-auto mt-16 md:mt-32">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-24 place-items-center">
+                  {/* Colonne gauche - plus haute */}
+                  <div className="flex flex-col gap-32 md:gap-40 md:translate-y-[-4rem] items-center w-full">
+                    <ProjectCard {...projects[0]} />
+                    <ProjectCard {...projects[1]} />
+                    <ProjectCard {...projects[4]} />
+                  </div>
+
+                  {/* Colonne droite */}
+                  <div className="flex flex-col gap-32 md:gap-40 md:translate-y-[4rem] items-center w-full">
+                    <ProjectCard {...projects[2]} />
+                    <ProjectCard {...projects[3]} />
+                    <ProjectCard {...projects[5]} />
+                  </div>
                 </div>
               </div>
             </section>
