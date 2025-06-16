@@ -6,19 +6,13 @@ import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useNavbarColorScheme } from '@/hooks/useColorScheme';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isInMain, setIsInMain] = useState(false);
-  const [verticalOffset, setVerticalOffset] = useState(0);
   const navRef = useRef(null);
-  const isLight = useColorScheme(isMobile, verticalOffset);
-
-  useEffect(() => {
-    setVerticalOffset(-window.innerHeight / 2 + 50);
-  }, []);
+  const isLight = useNavbarColorScheme(isMobile);
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -32,19 +26,6 @@ export default function Navbar() {
       window.removeEventListener('resize', checkIsMobile);
     };
   }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const headerHeight = isMobile ? 450 : 900;
-      setIsInMain(scrollPosition > headerHeight * 0.8);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isMobile]);
 
   useEffect(() => {
     if (isOpen) {
@@ -64,7 +45,7 @@ export default function Navbar() {
         right: 0,
         zIndex: 100,
       }}
-      className={`w-full flex items-center justify-between px-8 py-4 ${
+      className={`w-full flex items-center justify-between px-8 py-4 transition-colors duration-300 ${
         isLight ? 'text-white' : 'text-gray-800'
       }`}
     >
@@ -165,27 +146,6 @@ export default function Navbar() {
                   </NavLink>
                 </motion.li>
               ))}
-              <motion.div
-                className="flex gap-6 mt-8"
-                variants={{
-                  open: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { delay: 0.4 }
-                  },
-                  closed: { opacity: 0, y: 20 }
-                }}
-              >
-                <a href="https://github.com/tonprofil" target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-[#5A1441] transition-colors duration-300">
-                  <FaGithub size={32} />
-                </a>
-                <a href="https://linkedin.com/in/tonprofil" target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-[#5A1441] transition-colors duration-300">
-                  <FaLinkedinIn size={32} />
-                </a>
-                <a href="mailto:tonemail@example.com" className="text-gray-800 hover:text-[#5A1441] transition-colors duration-300">
-                  <HiOutlineMail size={32} />
-                </a>
-              </motion.div>
             </motion.ul>
           </motion.div>
         )}
@@ -205,7 +165,7 @@ export default function Navbar() {
                 <li key={item}>
                   <NavLink 
                     href={`#${item.toLowerCase()}`} 
-                    className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'}`}
+                    className={isLight ? 'text-white' : 'text-gray-800'}
                   >
                     {item}
                   </NavLink>
@@ -219,7 +179,7 @@ export default function Navbar() {
               href="https://github.com/tonprofil" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
+              className={`transition-colors duration-300 ${isLight ? 'text-white' : 'text-gray-800'}`}
             >
               <FaGithub size={24} />
             </a>
@@ -227,13 +187,13 @@ export default function Navbar() {
               href="https://linkedin.com/in/tonprofil" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
+              className={`transition-colors duration-300 ${isLight ? 'text-white' : 'text-gray-800'}`}
             >
               <FaLinkedinIn size={24} />
             </a>
             <a 
               href="mailto:tonemail@example.com"
-              className={`${isLight ? 'text-white hover:text-[#CDFB52]' : 'text-gray-800 hover:text-[#CDFB52]'} transition-all duration-300`}
+              className={`transition-colors duration-300 ${isLight ? 'text-white' : 'text-gray-800'}`}
             >
               <HiOutlineMail size={24} />
             </a>

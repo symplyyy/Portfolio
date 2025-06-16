@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useSpyNavColorScheme } from '@/hooks/useColorScheme';
 
 interface Section {
   id: string;
@@ -20,7 +20,7 @@ export const ScrollSpyNav: React.FC<ScrollSpyNavProps> = ({ sections, isLoading 
   const [isMobile, setIsMobile] = useState(false);
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
-  const isLight = useColorScheme(isMobile);
+  const isLight = useSpyNavColorScheme(isMobile);
 
   useEffect(() => {
     const checkIsMobile = () => {

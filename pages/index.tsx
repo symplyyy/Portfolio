@@ -205,7 +205,7 @@ export default function Home() {
         <div className={`w-full transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
           <header
             id="accueil"
-            className="
+            className=" whiteskin
               relative
               h-[55rem]
               sm:h-[60rem]
@@ -260,7 +260,7 @@ export default function Home() {
           <main>
             <section 
 
-              className={`mt-0 px-4 md:px-6 pb-0 md:pb-10 w-full mb-2 max-w-8xl mx-auto flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-0 transition-all duration-1000 delay-500 ${
+              className={`mt-0 px-4 md:px-6 pb-0 md:pb-10 blackskin w-full mb-2 max-w-8xl mx-auto flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-0 transition-all duration-1000 delay-500 ${
                 !isLoading ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`} 
               style={{ position: 'relative', zIndex: 20 }}
@@ -315,7 +315,7 @@ export default function Home() {
                 />
               </div>
             </section>
-            <section className="relative py-3 overflow-x-hidden" id="diagonal-section">
+            <section className="relative py-3 whiteskin overflow-x-hidden" id="diagonal-section">
               <div className="space-y-[-40px] sm:space-y-[-60px] md:space-y-[-120px]">
                 <DiagonalRevealText 
                   text="FRONTEND & BACKEND" 
@@ -347,7 +347,7 @@ export default function Home() {
             {/* Nouveau bloc bleu */}
             <section 
               id="competences"
-              className="relative w-full h-auto -mt-40 md:-mt-60 flex items-center justify-center flex-col pt-[5rem] md:pt-[15rem]"
+              className="relative blackskin w-full h-auto -mt-40 md:-mt-60 flex items-center justify-center flex-col pt-[5rem] md:pt-[15rem]"
             >
               <div className="relative mb-4 md:mb-16">
                 <ScrollFloat
