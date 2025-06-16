@@ -8,6 +8,9 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavbarColorScheme } from '@/hooks/useColorScheme';
 
+
+
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -36,6 +39,9 @@ export default function Navbar() {
   }, [isOpen]);
 
   return (
+
+    
+
     <motion.nav 
       ref={navRef}
       style={{ 
@@ -176,7 +182,7 @@ export default function Navbar() {
 
           <div className="flex gap-4 items-center mt-7 z-10">
             <a 
-              href="https://github.com/tonprofil" 
+              href="https://github.com/symplyyy" 
               target="_blank" 
               rel="noopener noreferrer" 
               className={`transition-colors duration-300 ${isLight ? 'text-white' : 'text-gray-800'}`}

@@ -8,7 +8,7 @@ import ScrollFloat from "../components/ScrollFloat";
 import { ScrollSpyNav } from "@/components/ScrollSpyNav";
 import RevealOnScroll from "../components/RevealOnScroll";
 import SkillCard from "../components/SkillCard";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectShowcase from "../components/ProjectShowcase";
 
 /* TODO : Ajout mode nuit */
 
@@ -48,7 +48,6 @@ const projects = [
     projectUrl: "https://sae501.mehr.soete.etu.mmi-unistra.fr/",
     technologies: ["Laravel", "Chart.js", "TailwindCSS", "MySQL", "Python"]
   },
-
   {
     title: "Plugin mode de jeu 'Invisible' CS2",
     description: "Plugin permettant d'implémenter un mode jeu se basant sur l'invisibilité dans Counter-Strike 2 sur serveur dédié.",
@@ -56,7 +55,6 @@ const projects = [
     projectUrl: "https://github.com/symplyyy/InvisiblePluginCS2",
     technologies: ["C#"]
   },
-
   {
     title: "Application web de suivi des vols en direct",
     description: "Application web permettant de visualiser les vols en direct à travers le monde.",
@@ -64,7 +62,6 @@ const projects = [
     projectUrl: "",
     technologies: ["Javascript", "D3.js", "Opensky Network API"]
   }
-
 ];
 
 export default function Home() {
@@ -469,27 +466,12 @@ export default function Home() {
             {/* Section Projets */}
             <section 
               id="projets"
-              className="relative w-full blackskin flex items-center whiteskin justify-center flex-col pt-5 md:pt-5 pb-80 animate-slideUp"
+              className="relative w-full blackskin flex items-center whiteskin justify-center flex-col pt-5 md:pt-5 pb-80"
               style={{
-                animation: 'slideUp 1s ease-out forwards',
-                opacity: 0,
-                transform: 'translateY(100px)',
-                clipPath: 'polygon(0 4%, 100% 0%, 100% 93%, 0% 100%)'
+                clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0% 100%)'
               }}
             >
-              <style jsx>{`
-                @keyframes slideUp {
-                  0% {
-                    opacity: 0;
-                    transform: translateY(100px);
-                  }
-                  100% {
-                    opacity: 1;
-                    transform: translateY(0);
-                  }
-                }
-              `}</style>
-              <div className="relative mb-16">
+              <div className="relative mb-4 md:mb-16">
                 <ScrollFloat
                   containerClassName="text-[#2C3E50] text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
                 >
@@ -497,29 +479,16 @@ export default function Home() {
                 </ScrollFloat>
               </div>
               
-              <div className="relative z-10 bg-[#5C97CE] backdrop-blur-sm rounded-full px-8 py-3 shadow-lg mb-16">
+              <div className="relative z-10 bg-[#5C97CE]/80 backdrop-blur-sm rounded-full px-8 py-2 md:py-3 shadow-lg mb-4 md:mb-16">
                 <p className="text-white text-center text-lg md:text-xl font-medium">
                   Découvrez mes réalisations les plus récentes
                 </p>
               </div>
 
-              {/* Container pour la grille de projets */}
-              <div className="relative z-10 w-[80%] mx-auto mt-16 md:mt-32">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-24 place-items-center">
-                  {/* Colonne gauche - plus haute */}
-                  <div className="flex flex-col gap-32 md:gap-40 md:translate-y-[-4rem] items-center w-full">
-                    <ProjectCard {...projects[0]} />
-                    <ProjectCard {...projects[1]} />
-                    <ProjectCard {...projects[4]} />
-                  </div>
-
-                  {/* Colonne droite */}
-                  <div className="flex flex-col gap-32 md:gap-40 md:translate-y-[4rem] items-center w-full">
-                    <ProjectCard {...projects[2]} />
-                    <ProjectCard {...projects[3]} />
-                    <ProjectCard {...projects[5]} />
-                  </div>
-                </div>
+              <div className="relative z-10 w-[95%] sm:w-[85%] lg:w-[80%] mx-auto px-2 sm:px-4">
+                <RevealOnScroll>
+                  <ProjectShowcase projects={projects} />
+                </RevealOnScroll>
               </div>
             </section>
 
