@@ -8,7 +8,7 @@ import ScrollFloat from "../components/ScrollFloat";
 import { ScrollSpyNav } from "@/components/ScrollSpyNav";
 import RevealOnScroll from "../components/RevealOnScroll";
 import SkillCard from "../components/SkillCard";
-import ProjectShowcase from "../components/ProjectShowcase";
+import ProfileCard from "../components/ProfileCard";
 
 /* TODO : Ajout mode nuit */
 
@@ -19,46 +19,47 @@ const sections = [
   { id: "parcours", label: "Parcours" },
 ];
 
+
 const projects = [
   {
     title: "Application web de gestion de projets et cartographie interactive pour un laboratoire",
     description: "Plateforme web permettant de gérer les projets d'un laboratoire et de visualiser ses relations internationales à travers une carte interactive.",
-    imageUrl: "/images/projects/labo.png",
+    imageUrl: "/images/projects/mockups/labo.png",  
     projectUrl: "",
     technologies: ["Symfony", "PostgreSQL", "Bootstrap"]
   },
   {
     title: "Terracorsica",
     description: "Site web proposant des parcours de randonnée en Corse (GR20).",
-    imageUrl: "/images/projects/terracorsica.png",
+    imageUrl: "/images/projects/mockups/terracorsica.png",
     projectUrl: "https://terracorsica.akifi.etu.mmi-unistra.fr/",
     technologies: ["Symfony", "MySQL", "API Google Maps"]
   },
   {
     title: "Statify",
     description: "Application web permettant de visualiser les statistiques de son compte Spotify.",
-    imageUrl: "/images/projects/spotify.png",
+    imageUrl: "/images/projects/mockups/statify.png",
     projectUrl: "https://statify.soete.etu.mmi-unistra.fr/",
     technologies: ["Javascript", "API Spotify", "D3.js"]
   },
   {
     title: "Application de suivi de consommation énergétique",
     description: "Application web permettant de suivre la consommation énergétique de l'IUT de Haguenau.",
-    imageUrl: "/images/projects/conso.png",
+    imageUrl: "/images/projects/mockups/conso.png",
     projectUrl: "https://sae501.mehr.soete.etu.mmi-unistra.fr/",
     technologies: ["Laravel", "Chart.js", "TailwindCSS", "MySQL", "Python"]
   },
   {
     title: "Plugin mode de jeu 'Invisible' CS2",
     description: "Plugin permettant d'implémenter un mode jeu se basant sur l'invisibilité dans Counter-Strike 2 sur serveur dédié.",
-    imageUrl: "/images/projects/conso.png",
+    imageUrl: "/images/projects/mockups/conso.png",
     projectUrl: "https://github.com/symplyyy/InvisiblePluginCS2",
     technologies: ["C#"]
   },
   {
     title: "Application web de suivi des vols en direct",
     description: "Application web permettant de visualiser les vols en direct à travers le monde.",
-    imageUrl: "/images/projects/globe.png",
+    imageUrl: "/images/projects/mockups/globe.png",
     projectUrl: "",
     technologies: ["Javascript", "D3.js", "Opensky Network API"]
   }
@@ -66,6 +67,7 @@ const projects = [
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const layer1Ref = useRef<HTMLDivElement>(null);
   const layer2Ref = useRef<HTMLDivElement>(null);
   const layer3Ref = useRef<HTMLDivElement>(null);
@@ -360,7 +362,7 @@ export default function Home() {
                 />
               </div>
             </section>
-            <section className="relative py-3 whiteskin overflow-x-hidden" id="diagonal-section">
+            <section className="relative py-3 whiteskin overflow-x-hidden " id="diagonal-section">
               <div className="space-y-[-40px] sm:space-y-[-60px] md:space-y-[-120px]">
                 <DiagonalRevealText 
                   text="FRONTEND & BACKEND" 
@@ -394,15 +396,15 @@ export default function Home() {
               id="competences"
               className="relative blackskin w-full h-auto -mt-40 md:-mt-60 flex items-center justify-center flex-col pt-[5rem] md:pt-[15rem] pb-30"
             >
-              <div className="relative mb-4 md:mb-16">
+              <div className="relative mb-4 md:mb-16 pt-25 md:pt-0">
                 <ScrollFloat
-                  containerClassName="text-[#6299CE] text-[1.8rem] pb-[0.5rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                  containerClassName="text-[#6299CE] text-[5rem] pb-[0.5rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
                 >
                   COMPÉTENCES
                 </ScrollFloat>
               </div>
               
-              <div className="relative z-10 bg-[#6299CE]/80 backdrop-blur-sm rounded-full px-8 py-2 md:py-3 shadow-lg mb-4 md:mb-16">
+              <div className="relative z-10 bg-[#6299CE]/80 backdrop-blur-sm rounded-full mb-10 md:mb-0 mt-10 md:mt-0 px-8 py-2 md:py-3 shadow-lg mb-4 md:mb-16">
                 <p className="text-white text-center text-lg md:text-xl font-medium">
                   Chaque carte détaille mes compétences clés.
                 </p>
@@ -410,9 +412,9 @@ export default function Home() {
               
               {/* Cartes de compétences */}
               <div className="relative z-10 w-[95%] sm:w-[85%] lg:w-[80%] mx-auto px-2 sm:px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 auto-rows-fr">
                   
-                  <RevealOnScroll delay={0} className="w-full">
+                  <RevealOnScroll delay={0} className="w-full h-full">
                     <SkillCard
                       title="Frontend"
                       description="Création d'interfaces utilisateur modernes et réactives avec les dernières technologies web."
@@ -428,7 +430,7 @@ export default function Home() {
                     />
                   </RevealOnScroll>
 
-                  <RevealOnScroll delay={150} className="w-full">
+                  <RevealOnScroll delay={150} className="w-full h-full">
                     <SkillCard
                       title="Backend"
                       description="Développement d'applications serveur avec PHP et Node.js, gestion de bases de données relationnelles."
@@ -444,7 +446,7 @@ export default function Home() {
                     />
                   </RevealOnScroll>
 
-                  <RevealOnScroll delay={300} className="w-full md:col-span-2 lg:col-span-1">
+                  <RevealOnScroll delay={300} className="w-full h-full md:col-span-2 lg:col-span-1">
                     <SkillCard
                       title="Autre"
                       description="Maîtrise des outils de design, de gestion de version et de développement de jeux pour des projets créatifs complets."
@@ -464,32 +466,106 @@ export default function Home() {
             </section>
 
             {/* Section Projets */}
+            
+
+            {/* Section À propos */}
             <section 
               id="projets"
-              className="relative w-full blackskin flex items-center whiteskin justify-center flex-col pt-5 md:pt-5 pb-80"
               style={{
-                clipPath: 'polygon(0 4%, 100% 0%, 100% 96%, 0% 100%)'
+                background: 'linear-gradient(135deg, #A2B6CF 0%, #8AA9CC 100%)',
+                clipPath: 'polygon(0 0, 100% 4%, 100% 100%, 0 96%)'
               }}
+              className="relative w-full whiteskin flex items-center justify-center flex-col pt-5 md:pt-5 pb-20 "
             >
+              
               <div className="relative mb-4 md:mb-16">
                 <ScrollFloat
-                  containerClassName="text-[#2C3E50] text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                  containerClassName="text-white text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
                 >
-                  PROJETS
+                  MES PROJETS
                 </ScrollFloat>
               </div>
               
-              <div className="relative z-10 bg-[#5C97CE]/80 backdrop-blur-sm rounded-full px-8 py-2 md:py-3 shadow-lg mb-4 md:mb-16">
-                <p className="text-white text-center text-lg md:text-xl font-medium">
-                  Découvrez mes réalisations les plus récentes
+              <div className="relative z-10 bg-[#CDFB52]/80 backdrop-blur-sm rounded-full px-8 py-2 md:py-3 shadow-lg mb-16">
+                <p className="text-black text-center text-lg md:text-xl font-medium">
+                  Explorez mes réalisations en détail
                 </p>
               </div>
 
-              <div className="relative z-10 w-[95%] sm:w-[85%] lg:w-[80%] mx-auto px-2 sm:px-4">
-                <RevealOnScroll>
-                  <ProjectShowcase projects={projects} />
-                </RevealOnScroll>
-              </div>
+              <div className="relative z-10 w-full px-4 overflow-hidden">
+                <div className="relative w-[70%] max-w-[1200px] mx-auto">
+                  {/* Flèche gauche */}
+                  <button
+                    onClick={() => {
+                      setCurrentIndex(prev => Math.max(0, prev - 1));
+                    }}
+                    disabled={currentIndex === 0}
+                    className="absolute -left-16 top-1/2 -translate-y-1/2 z-20 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl disabled:hover:scale-100 disabled:hover:shadow-lg"
+                    style={{ 
+                      backgroundColor: currentIndex === 0 ? '#8B9D6B' : '#CDFB52',
+                      color: '#1f2937',
+                      opacity: currentIndex === 0 ? 0.6 : 1
+                    }}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+
+                  {/* Flèche droite */}
+                  <button
+                    onClick={() => {
+                      setCurrentIndex(prev => Math.min(projects.length - 3, prev + 1));
+                    }}
+                    disabled={currentIndex >= projects.length - 3}
+                    className="absolute -right-16 top-1/2 -translate-y-1/2 z-20 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl disabled:hover:scale-100 disabled:hover:shadow-lg"
+                    style={{ 
+                      backgroundColor: currentIndex >= projects.length - 3 ? '#8B9D6B' : '#CDFB52',
+                      color: '#1f2937',
+                      opacity: currentIndex >= projects.length - 3 ? 0.6 : 1
+                    }}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+
+                  {/* Container de défilement */}
+                  <div
+                    id="project-carousel"
+                    className="py-4 "
+                  >
+                    <div 
+                      className="flex gap-6 transition-transform duration-700 ease-in-out"
+                      style={{
+                        transform: `translateX(calc(${currentIndex * -33.333}% - ${currentIndex * 1.5}rem))`
+                      }}
+                    >
+                      {projects.map((project, index) => (
+                        <div
+                          key={index}
+                          className="project-card flex-shrink-0 pb-10"
+                          style={{ 
+                            width: 'calc(33.333% - 1rem)',
+                            transform: `translateY(${index % 2 === 1 ? '3rem' : '0'})`
+                          }}
+                        >
+                          <ProfileCard
+                            title={project.title}
+                            description={project.description}
+                            imageUrl={project.imageUrl}
+                            projectUrl={project.projectUrl}
+                            technologies={project.technologies}
+                            isProject={true}
+                            socialIcon="external"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+            </div>
+
             </section>
 
           </main>

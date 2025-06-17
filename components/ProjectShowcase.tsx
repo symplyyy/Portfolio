@@ -22,6 +22,7 @@ const techColors: { [key: string]: string } = {
   'PostgreSQL': 'bg-gradient-to-r from-green-500 to-teal-600',
   'MySQL': 'bg-gradient-to-r from-green-500 to-teal-600',
   'C#': 'bg-gradient-to-r from-green-500 to-teal-600',
+  "Python": "bg-gradient-to-r from-green-500 to-teal-600",
   
   // Autre/API/Design
   'API Google Maps': 'bg-gradient-to-r from-orange-500 to-red-600',
