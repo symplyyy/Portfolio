@@ -68,6 +68,7 @@ const projects = [
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showAllProjects, setShowAllProjects] = useState(false);
   const layer1Ref = useRef<HTMLDivElement>(null);
   const layer2Ref = useRef<HTMLDivElement>(null);
   const layer3Ref = useRef<HTMLDivElement>(null);
@@ -404,8 +405,8 @@ export default function Home() {
                 </ScrollFloat>
               </div>
               
-              <div className="relative z-10 bg-[#6299CE]/80 backdrop-blur-sm rounded-full mb-10 md:mb-0 mt-10 md:mt-0 px-8 py-2 md:py-3 shadow-lg mb-4 md:mb-16">
-                <p className="text-white text-center text-lg md:text-xl font-medium">
+              <div className="relative z-10 bg-[#6299CE]/80 backdrop-blur-sm rounded-full px-4 md:px-8 mt-10 py-1.5 md:py-3 shadow-lg mb-8 md:mb-16">
+                <p className="text-white text-center text-sm md:text-lg lg:text-xl font-medium">
                   Chaque carte détaille mes compétences clés.
                 </p>
               </div>
@@ -472,10 +473,9 @@ export default function Home() {
             <section 
               id="projets"
               style={{
-                background: 'linear-gradient(135deg, #A2B6CF 0%, #8AA9CC 100%)',
-                clipPath: 'polygon(0 0, 100% 4%, 100% 100%, 0 96%)'
+                background: 'linear-gradient(135deg, #A2B6CF 0%, #8AA9CC 100%)'
               }}
-              className="relative w-full whiteskin flex items-center justify-center flex-col pt-5 md:pt-5 pb-40 "
+              className="relative w-full whiteskin flex items-center justify-center flex-col pt-5 md:pt-5 pb-40 projects-section"
             >
               
               <div className="relative mb-4 md:mb-16">
@@ -486,13 +486,14 @@ export default function Home() {
                 </ScrollFloat>
               </div>
               
-              <div className="relative z-10 bg-[#CDFB52]/80 backdrop-blur-sm rounded-full px-8 py-2 md:py-3 shadow-lg mb-16">
-                <p className="text-black text-center text-lg md:text-xl font-medium">
+              <div className="relative z-10 bg-[#CDFB52]/80 backdrop-blur-sm rounded-full px-4 md:px-8 mt-10 py-1.5 md:py-3 shadow-lg mb-8 md:mb-16">
+                <p className="text-black text-center text-sm md:text-lg lg:text-xl font-medium">
                   Explorez mes réalisations en détail
                 </p>
               </div>
 
-              <div className="relative z-10 w-full px-4 overflow-hidden">
+              {/* Version desktop - Carrousel */}
+              <div className="relative z-10 w-full px-4 overflow-hidden hidden md:block">
                 <div className="relative w-[70%] max-w-[1200px] mx-auto">
                   {/* Flèche gauche optimisée */}
                   <button
@@ -573,7 +574,7 @@ export default function Home() {
                     >
                       {projects.map((project, index) => (
                         <div
-                          key={`project-${index}`}
+                          key={`project-desktop-${index}`}
                           className="project-card flex-shrink-0 pb-10 will-change-transform"
                           style={{ 
                             width: 'calc(33.333% - 1rem)',
@@ -596,7 +597,86 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-            </div>
+              </div>
+
+              {/* Version mobile - Grille verticale */}
+              <div className="relative z-10 w-full px-4 block md:hidden">
+                <div className="max-w-sm mx-auto space-y-6">
+                  {projects.slice(0, showAllProjects ? projects.length : 2).map((project, index) => (
+                    <div
+                      key={`project-mobile-${index}`}
+                      className="w-full will-change-transform"
+                      style={{
+                        transform: 'translateZ(0)',
+                        animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
+                      }}
+                    >
+                      <ProfileCard
+                        title={project.title}
+                        description={project.description}
+                        imageUrl={project.imageUrl}
+                        projectUrl={project.projectUrl}
+                        technologies={project.technologies}
+                        isProject={true}
+                        socialIcon="external"
+                      />
+                    </div>
+                  ))}
+                  
+                  {/* Bouton Afficher plus de projets */}
+                  {!showAllProjects && projects.length > 2 && (
+                    <div className="flex justify-center mt-8">
+                      <button
+                        onClick={() => setShowAllProjects(true)}
+                        className="bg-[#CDFB52] hover:bg-[#cdfb58d0] text-black font-medium px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105 transform will-change-transform"
+                        style={{ transform: 'translateZ(0)' }}
+                      >
+                        Afficher plus de projets
+                        <svg className="w-4 h-4 ml-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
+                  
+                  {/* Bouton Afficher moins (optionnel) */}
+                  {showAllProjects && projects.length > 2 && (
+                    <div className="flex justify-center mt-8">
+                      <button
+                        onClick={() => setShowAllProjects(false)}
+                        className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105 transform will-change-transform"
+                        style={{ transform: 'translateZ(0)' }}
+                      >
+                        Afficher moins
+                        <svg className="w-4 h-4 ml-2 inline rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <style jsx>{`
+                .projects-section {
+                  clip-path: polygon(0 0, 100% 1%, 100% 100%, 0 99%);
+                }
+                @media (min-width: 768px) {
+                  .projects-section {
+                    clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 96%);
+                  }
+                }
+                @keyframes fadeInUp {
+                  from {
+                    opacity: 0;
+                    transform: translate3d(0, 2rem, 0);
+                  }
+                  to {
+                    opacity: 1;
+                    transform: translate3d(0, 0, 0);
+                  }
+                }
+              `}</style>
 
             </section>
 

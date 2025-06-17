@@ -58,14 +58,21 @@ export default function ProfileCard({
 
   return (
     <div 
-      className="relative max-w-md mx-auto bg-gradient-to-br rounded-t-xl shadow-2xl overflow-hidden group will-change-transform" 
+      className="relative max-w-md mx-auto bg-gradient-to-br rounded-t-xl shadow-2xl overflow-hidden group will-change-transform profile-card-responsive" 
       style={{ 
-        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 95%)',
         transform: 'translateZ(0)' // Force hardware acceleration
       }}
     >
       {/* Animation de hover optimisée avec transform3d */}
       <style jsx>{`
+        .profile-card-responsive {
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 98%);
+        }
+        @media (min-width: 768px) {
+          .profile-card-responsive {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 95%);
+          }
+        }
         .profile-card {
           transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
