@@ -4,6 +4,9 @@ export default function Document() {
   return (
     <Html lang="fr">
       <Head>
+        {/* Titre de la page */}
+        <title>Portfolio - Timéo Soëte</title>
+        
         {/* Favicon */}
         <link rel="icon" href="/images/favicon.ico" />
         <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
