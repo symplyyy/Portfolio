@@ -185,7 +185,17 @@ export default function Navbar() {
               href="https://github.com/symplyyy" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className={`transition-colors duration-300 ${isLight ? 'text-white' : 'text-gray-800'}`}
+              className={`transition-all duration-300 hover:scale-110 transform will-change-transform ${isLight ? 'text-white' : 'text-gray-800'}`}
+              style={{ 
+                transform: 'translateZ(0)',
+                color: 'inherit'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#CDFB52';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'inherit';
+              }}
             >
               <FaGithub size={24} />
             </a>
@@ -193,13 +203,33 @@ export default function Navbar() {
               href="https://linkedin.com/in/tonprofil" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className={`transition-colors duration-300 ${isLight ? 'text-white' : 'text-gray-800'}`}
+              className={`transition-all duration-300 hover:scale-110 transform will-change-transform ${isLight ? 'text-white' : 'text-gray-800'}`}
+              style={{ 
+                transform: 'translateZ(0)',
+                color: 'inherit'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#CDFB52';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'inherit';
+              }}
             >
               <FaLinkedinIn size={24} />
             </a>
             <a 
               href="mailto:tonemail@example.com"
-              className={`transition-colors duration-300 ${isLight ? 'text-white' : 'text-gray-800'}`}
+              className={`transition-all duration-300 hover:scale-110 transform will-change-transform ${isLight ? 'text-white' : 'text-gray-800'}`}
+              style={{ 
+                transform: 'translateZ(0)',
+                color: 'inherit'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#CDFB52';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'inherit';
+              }}
             >
               <HiOutlineMail size={24} />
             </a>

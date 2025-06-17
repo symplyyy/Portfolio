@@ -684,6 +684,17 @@ export default function Home() {
 
             </section>
 
+            <section className="pb-100">
+              <div className="relative mb-4 md:mb-16">
+                <ScrollFloat
+                  containerClassName="text-white text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                >
+                  PARCOURS
+                </ScrollFloat>
+              </div>
+            </section>
+
+
           </main>
         </div>
       </div>
