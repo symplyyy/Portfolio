@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import { BoxReveal } from "@/components/magicui/box-reveal";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -229,11 +230,17 @@ export default function Home() {
   }, [isLoading]);
 
   return (
-    <div className="relative w-full h-full">
-      {/* Container principal avec contexte d'empilement */}
-      <div className="relative w-full min-h-screen" style={{ isolation: 'isolate' }}>
-        <Navbar />
-        <ScrollSpyNav sections={sections} isLoading={isLoading} />
+    <>
+      <Head>
+        <title>Portfolio - Timéo Soëte</title>
+        <meta name="description" content="Portfolio de Timéo Soëte - Développeur Web Frontend & Backend spécialisé en React, Next.js, PHP et technologies modernes." />
+      </Head>
+      
+      <div className="relative w-full h-full">
+        {/* Container principal avec contexte d'empilement */}
+        <div className="relative w-full min-h-screen" style={{ isolation: 'isolate' }}>
+          <Navbar />
+          <ScrollSpyNav sections={sections} isLoading={isLoading} />
         
         {/* Fond de transition */}
         <div 
@@ -699,5 +706,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </>
   );
 }
