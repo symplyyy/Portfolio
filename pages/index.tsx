@@ -528,14 +528,18 @@ export default function Home() {
                   {/* Flèche droite optimisée */}
                   <button
                     onClick={() => {
-                      setCurrentIndex(prev => Math.min(projects.length - 3, prev + 1));
+                      // Calcul pour s'assurer qu'on ne dépasse pas la position optimale
+                      // Si on a moins de 3 projets, on ne peut pas défiler
+                      // Sinon, le dernier index possible est (nombre de projets - 3)
+                      const maxIndex = projects.length <= 3 ? 0 : projects.length - 3;
+                      setCurrentIndex(prev => Math.min(maxIndex, prev + 1));
                     }}
-                    disabled={currentIndex >= projects.length - 3}
+                    disabled={projects.length <= 3 || currentIndex >= projects.length - 3}
                     className="absolute -right-16 top-1/2 -translate-y-1/2 z-20 rounded-full p-3 shadow-lg will-change-transform"
                     style={{ 
-                      backgroundColor: currentIndex >= projects.length - 3 ? '#8B9D6B' : '#CDFB52',
+                      backgroundColor: (projects.length <= 3 || currentIndex >= projects.length - 3) ? '#8B9D6B' : '#CDFB52',
                       color: '#1f2937',
-                      opacity: currentIndex >= projects.length - 3 ? 0.6 : 1,
+                      opacity: (projects.length <= 3 || currentIndex >= projects.length - 3) ? 0.6 : 1,
                       transform: 'translateZ(0)',
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                     }}
