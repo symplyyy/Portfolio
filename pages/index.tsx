@@ -475,7 +475,7 @@ export default function Home() {
                 background: 'linear-gradient(135deg, #A2B6CF 0%, #8AA9CC 100%)',
                 clipPath: 'polygon(0 0, 100% 4%, 100% 100%, 0 96%)'
               }}
-              className="relative w-full whiteskin flex items-center justify-center flex-col pt-5 md:pt-5 pb-20 "
+              className="relative w-full whiteskin flex items-center justify-center flex-col pt-5 md:pt-5 pb-40 "
             >
               
               <div className="relative mb-4 md:mb-16">
@@ -494,17 +494,29 @@ export default function Home() {
 
               <div className="relative z-10 w-full px-4 overflow-hidden">
                 <div className="relative w-[70%] max-w-[1200px] mx-auto">
-                  {/* Flèche gauche */}
+                  {/* Flèche gauche optimisée */}
                   <button
                     onClick={() => {
                       setCurrentIndex(prev => Math.max(0, prev - 1));
                     }}
                     disabled={currentIndex === 0}
-                    className="absolute -left-16 top-1/2 -translate-y-1/2 z-20 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl disabled:hover:scale-100 disabled:hover:shadow-lg"
+                    className="absolute -left-16 top-1/2 -translate-y-1/2 z-20 rounded-full p-3 shadow-lg will-change-transform"
                     style={{ 
                       backgroundColor: currentIndex === 0 ? '#8B9D6B' : '#CDFB52',
                       color: '#1f2937',
-                      opacity: currentIndex === 0 ? 0.6 : 1
+                      opacity: currentIndex === 0 ? 0.6 : 1,
+                      transform: 'translateZ(0)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!e.currentTarget.disabled) {
+                        e.currentTarget.style.transform = 'scale3d(1.1, 1.1, 1) translateZ(0)';
+                        e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale3d(1, 1, 1) translateZ(0)';
+                      e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
                     }}
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -512,17 +524,29 @@ export default function Home() {
                     </svg>
                   </button>
 
-                  {/* Flèche droite */}
+                  {/* Flèche droite optimisée */}
                   <button
                     onClick={() => {
                       setCurrentIndex(prev => Math.min(projects.length - 3, prev + 1));
                     }}
                     disabled={currentIndex >= projects.length - 3}
-                    className="absolute -right-16 top-1/2 -translate-y-1/2 z-20 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl disabled:hover:scale-100 disabled:hover:shadow-lg"
+                    className="absolute -right-16 top-1/2 -translate-y-1/2 z-20 rounded-full p-3 shadow-lg will-change-transform"
                     style={{ 
                       backgroundColor: currentIndex >= projects.length - 3 ? '#8B9D6B' : '#CDFB52',
                       color: '#1f2937',
-                      opacity: currentIndex >= projects.length - 3 ? 0.6 : 1
+                      opacity: currentIndex >= projects.length - 3 ? 0.6 : 1,
+                      transform: 'translateZ(0)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!e.currentTarget.disabled) {
+                        e.currentTarget.style.transform = 'scale3d(1.1, 1.1, 1) translateZ(0)';
+                        e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale3d(1, 1, 1) translateZ(0)';
+                      e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
                     }}
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -530,24 +554,32 @@ export default function Home() {
                     </svg>
                   </button>
 
-                  {/* Container de défilement */}
+                  {/* Container de défilement optimisé */}
                   <div
                     id="project-carousel"
-                    className="py-4 "
+                    className="py-4"
+                    style={{ 
+                      perspective: '1000px',
+                      willChange: 'transform'
+                    }}
                   >
                     <div 
-                      className="flex gap-6 transition-transform duration-700 ease-in-out"
+                      className="flex gap-6 will-change-transform"
                       style={{
-                        transform: `translateX(calc(${currentIndex * -33.333}% - ${currentIndex * 1.5}rem))`
+                        transform: `translate3d(calc(${currentIndex * -33.333}% - ${currentIndex * 1.5}rem), 0, 0)`,
+                        transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                        backfaceVisibility: 'hidden'
                       }}
                     >
                       {projects.map((project, index) => (
                         <div
-                          key={index}
-                          className="project-card flex-shrink-0 pb-10"
+                          key={`project-${index}`}
+                          className="project-card flex-shrink-0 pb-10 will-change-transform"
                           style={{ 
                             width: 'calc(33.333% - 1rem)',
-                            transform: `translateY(${index % 2 === 1 ? '3rem' : '0'})`
+                            transform: `translate3d(0, ${index % 2 === 1 ? '3rem' : '0'}, 0)`,
+                            transition: 'transform 0.3s ease-out',
+                            transformStyle: 'preserve-3d'
                           }}
                         >
                           <ProfileCard

@@ -73,15 +73,27 @@ export const ScrollSpyNav: React.FC<ScrollSpyNavProps> = ({ sections, isLoading 
           }
           // Pour la section "competences"
           else if (section.id === "competences") {
-            if (scrollPosition >= absoluteTop - viewportHeight * 0.6) {
+            if (scrollPosition >= absoluteTop - viewportHeight * 0.6 && scrollPosition < sectionEnd - viewportHeight * 0.1) {
               setActiveSection(section.id);
               const sectionStart = absoluteTop - viewportHeight * 0.6;
+              const sectionLength = sectionEnd - sectionStart - viewportHeight * 0.1;
+              const currentProgress = (scrollPosition - sectionStart) / sectionLength;
+              setProgress(Math.max(0, Math.min(1, currentProgress)));
+              return;
+            }
+          }
+          // Pour la section "projets" (gestion spéciale à cause du clipPath)
+          else if (section.id === "projets") {
+            // Détection plus agressive pour la section projets
+            if (rect.top <= viewportHeight * 0.6 || scrollPosition >= absoluteTop - viewportHeight * 0.7) {
+              setActiveSection(section.id);
+              const sectionStart = absoluteTop - viewportHeight * 0.7;
               const sectionLength = sectionEnd - sectionStart;
               const currentProgress = (scrollPosition - sectionStart) / sectionLength;
               setProgress(Math.max(0, Math.min(1, currentProgress)));
               return;
             }
-          } 
+          }
           // Pour les autres sections
           else if (rect.top <= viewportHeight * 0.4 && rect.bottom >= viewportHeight * 0.3) {
             setActiveSection(section.id);

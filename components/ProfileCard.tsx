@@ -56,98 +56,126 @@ export default function ProfileCard({
     }
   };
 
-
-
   return (
     <div 
-      className="relative max-w-md mx-auto bg-gradient-to-br rounded-t-xl shadow-2xl overflow-hidden group hover:scale-105 transition-transform duration-300" 
-      style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 95%)' }}
+      className="relative max-w-md mx-auto bg-gradient-to-br rounded-t-xl shadow-2xl overflow-hidden group will-change-transform" 
+      style={{ 
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 95%)',
+        transform: 'translateZ(0)' // Force hardware acceleration
+      }}
     >
-      {/* Image principale */}
-      <div className="relative h-72 bg-gradient-to-br overflow-hidden rounded-xl">
-        <Image
-          src={imageUrl}
-          alt={title}
-          width={400}
-          height={256}
-          className="w-full h-full object-cover"
-          quality={100}
-        />
-      </div>
-      
-      {/* Section informations avec polygon path en biais */}
-      <div className="relative -mt-8">
-        {/* Forme en biais avec clip-path qui remonte dans la partie bleue */}
-        <div 
-          className="bg-gray-900 text-white p-6 pb-10 pt-2 relative"
-          style={{
-            clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0% 90%)'
-          }}
-        >
-          <div className="mt-2 space-y-3">
-            {/* Nom (optionnel pour profil) */}
-            {name && !isProject && (
-              <h2 className="text-2xl font-bold">
-                {name}
-              </h2>
-            )}
-            
-            {/* Titre */}
-            <h3 className={`font-bold text-white ${isProject ? 'text-xl' : 'text-lg italic'} `}>
-              {title}
-            </h3>
-            
-            {/* Description */}
-            <p className="text-sm text-gray-300 leading-relaxed line-clamp-3">
-              {description}
-            </p>
-            
-            {/* Technologies (pour les projets) */}
-            {isProject && technologies.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-4">
-                {technologies.slice(0, 4).map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2 py-1 rounded-full text-xs font-medium text-white bg-gray-600 border border-gray-500"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            )}
-            
-            {/* Bouton d'action */}
-            <div className="mt-4">
-              {isProject && projectUrl ? (
-                <Link
-                  href={projectUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-black px-4 py-2 bg-[#CDFB52] hover:bg-[#cdfb58d0] rounded-lg text-sm font-medium transition-colors duration-200"
-                >
-                  Voir le projet
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </Link>
-              ) : null}
-            </div>
+      {/* Animation de hover optimisée avec transform3d */}
+      <style jsx>{`
+        .profile-card {
+          transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .profile-card:hover {
+          transform: scale3d(1.05, 1.05, 1) translateZ(0);
+        }
+        .image-container {
+          transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .profile-card:hover .image-container {
+          transform: scale3d(1.1, 1.1, 1) translateZ(0);
+        }
+        .button-hover {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .button-hover:hover {
+          transform: scale3d(1.1, 1.1, 1) translateZ(0);
+        }
+      `}</style>
+
+      <div className="profile-card">
+        {/* Image principale avec optimisation */}
+        <div className="relative h-72 bg-gradient-to-br overflow-hidden rounded-xl">
+          <div className="image-container w-full h-full">
+            <Image
+              src={imageUrl}
+              alt={title}
+              width={400}
+              height={256}
+              className="w-full h-full object-cover"
+              quality={75}
+              priority={false}
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+            />
           </div>
         </div>
         
-        {/* Bouton social flottant */}
-        {socialUrl && (
-          <div className="absolute -bottom-6 left-6">
-            <Link
-              href={socialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 bg-white text-gray-900 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200"
-            >
-              {getSocialIcon()}
-            </Link>
+        {/* Section informations avec polygon path en biais */}
+        <div className="relative -mt-8">
+          {/* Forme en biais avec clip-path qui remonte dans la partie bleue */}
+          <div 
+            className="bg-gray-900 text-white p-6 pb-10 pt-2 relative"
+    
+          >
+            <div className="mt-2 space-y-3">
+              {/* Nom (optionnel pour profil) */}
+              {name && !isProject && (
+                <h2 className="text-2xl font-bold">
+                  {name}
+                </h2>
+              )}
+              
+              {/* Titre */}
+              <h3 className={`font-bold text-white ${isProject ? 'text-xl' : 'text-lg italic'} `}>
+                {title}
+              </h3>
+              
+              {/* Description */}
+              <p className="text-sm text-gray-300 leading-relaxed line-clamp-3">
+                {description}
+              </p>
+              
+              {/* Technologies (pour les projets) */}
+              {isProject && technologies.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {technologies.slice(0, 4).map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-1 rounded-full text-xs font-medium text-white bg-gray-600 border border-gray-500 transform transition-transform duration-200 hover:scale-105"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+              
+              {/* Bouton d'action */}
+              <div className="mt-4">
+                {isProject && projectUrl ? (
+                  <Link
+                    href={projectUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="button-hover inline-flex items-center text-black px-4 py-2 bg-[#CDFB52] hover:bg-[#cdfb58d0] rounded-lg text-sm font-medium will-change-transform"
+                  >
+                    Voir le projet
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </Link>
+                ) : null}
+              </div>
+            </div>
           </div>
-        )}
+          
+          {/* Bouton social flottant */}
+          {socialUrl && (
+            <div className="absolute -bottom-6 left-6">
+              <Link
+                href={socialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button-hover w-12 h-12 bg-white text-gray-900 rounded-full flex items-center justify-center shadow-lg will-change-transform"
+              >
+                {getSocialIcon()}
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
