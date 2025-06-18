@@ -1,40 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Portfolio - Timéo Soëte
 
-## Getting Started
+Portfolio personnel développé avec Next.js, présentant mes compétences et projets en développement web.
 
-First, run the development server:
+## 🚀 Démarrage rapide
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Prérequis
+- Node.js (version 22 ou supérieure)
+- npm ou yarn
+
+### Installation
+
+1. **Clonez le projet**
+   ```bash
+   git clone [URL_DU_REPO]
+   cd Portfolio
+   ```
+
+2. **Installez les dépendances**
+   ```bash
+   npm install
+   ```
+
+3. **Lancez le serveur de développement**
+   ```bash
+   npm run dev
+   ```
+
+4. **Ouvrez votre navigateur**
+   Rendez-vous sur [http://localhost:3000](http://localhost:3000)
+
+## 📦 Scripts disponibles
+
+- `npm run dev` - Lance le serveur de développement
+- `npm run build` - Compile le projet pour la production
+- `npm run start` - Lance le serveur de production
+- `npm run lint` - Vérifie la qualité du code
+
+## 🛠️ Technologies utilisées
+
+### Frontend
+- **Next.js 15** - Framework React
+- **TypeScript** - Typage statique
+- **TailwindCSS 4** - Framework CSS
+- **Framer Motion** - Animations
+- **GSAP** - Animations avancées
+
+### 3D & Animations
+- **Three.js** - Rendu 3D
+- **React Three Fiber** - Three.js pour React
+- **React Three Drei** - Helpers pour Three.js
+- **Lenis** - Smooth scroll
+
+### UI/UX
+- **Material-UI** - Composants
+- **Lucide React** - Icônes
+- **HTML2Canvas** - Capture d'écran
+
+## 📁 Structure du projet
+
+```
+Portfolio/
+├── components/           # Composants réutilisables
+│   ├── magicui/         # Composants d'animation
+│   └── ui/              # Composants d'interface
+├── hooks/               # Hooks personnalisés
+├── lib/                 # Utilitaires
+├── pages/               # Pages Next.js
+├── public/              # Assets statiques
+│   ├── images/          # Images du portfolio
+│   ├── assets/          # Modèles 3D
+│   └── fonts/           # Polices personnalisées
+└── styles/              # Styles globaux
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Personnalisation
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Modifier le contenu
+1. **Informations personnelles** : Editez `pages/index.tsx`
+2. **Projets** : Modifiez le tableau `projects` dans `pages/index.tsx`
+3. **Images** : Remplacez les fichiers dans `public/images/`
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Changer les couleurs
+Les couleurs principales sont définies dans `tailwind.config.js` et peuvent être modifiées selon vos préférences.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+### Ajouter des sections
+Créez de nouveaux composants dans le dossier `components/` et importez-les dans `pages/index.tsx`.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 Déploiement
 
-## Learn More
+### Vercel (recommandé)
+1. Connectez votre repo GitHub à Vercel
+2. Le déploiement se fait automatiquement
 
-To learn more about Next.js, take a look at the following resources:
+### Serveur personnel
+```bash
+npm run build
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+## 🖼️ Assets requis
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Assurez-vous d'avoir ces éléments dans `public/images/` :
+- `avatar.png` - Photo de profil
+- `logo_portfolio.png` - Logo principal
+- `header/background.png` - Image de fond
+- `projects/mockups/` - Captures d'écran des projets
 
-## Deploy on Vercel
+## ⚡ Optimisations
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Performance
+- Images optimisées avec Next.js Image
+- Lazy loading des composants
+- Animations hardware-accelerated
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+---
+
+Développé par Timéo Soëte
