@@ -289,7 +289,7 @@ export default function Home() {
 
             <div
               ref={parallaxRef}
-              className={`relative z-[2] flex flex-col justify-center items-center px-4 md:h-auto sm:mt-50 mt-0 md:mt-5 h-screen -mt-20 md:mt-0 ${
+              className={`relative z-[2] flex flex-col justify-center items-center px-4 md:h-auto sm:mt-50 mt-0 md:mt-5 h-auto py-8 md:py-0 md:h-screen ${
                 !isLoading ? 'zoom-in' : 'opacity-0 scale-50'
               }`}
             >
@@ -315,7 +315,7 @@ export default function Home() {
           <main>
             <section 
 
-              className={`mt-0 px-4 md:px-6 pb-0 md:pb-10 blackskin w-full mb-2 max-w-8xl mx-auto flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-0 transition-all duration-1000 delay-500 ${
+              className={`mt-0 px-4 md:px-6 pb-0 md:pb-10 blackskin w-full mb-2 max-w-8xl mx-auto flex flex-col md:flex-row justify-start md:justify-center items-start md:items-start gap-8 md:gap-0 transition-all duration-1000 delay-500 ${
                 !isLoading ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`} 
               style={{ position: 'relative', zIndex: 20 }}
@@ -370,7 +370,7 @@ export default function Home() {
                 />
               </div>
             </section>
-            <section className="relative py-3 whiteskin overflow-x-hidden " id="diagonal-section">
+            <section className="relative py-3 whiteskin overflow-x-hidden mt-[-3rem]" id="diagonal-section">
               <div className="space-y-[-40px] sm:space-y-[-60px] md:space-y-[-120px]">
                 <DiagonalRevealText 
                   text="FRONTEND & BACKEND" 
@@ -402,9 +402,9 @@ export default function Home() {
             {/* Nouveau bloc bleu */}
             <section 
               id="competences"
-              className="relative blackskin w-full h-auto -mt-40 md:-mt-60 flex items-center justify-center flex-col pt-[5rem] md:pt-[15rem] pb-30"
+              className="relative blackskin w-full h-auto -mt-40 md:-mt-60 flex items-center justify-center flex-col pt-[5rem] md:pt-[15rem] pb-15"
             >
-              <div className="relative mb-4 md:mb-16 pt-25 md:pt-0">
+              <div className="relative mb-4 md:mb-16 pt-12 md:pt-0">
                 <ScrollFloat
                   containerClassName="text-[#6299CE] text-[5rem] pb-[0.5rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
                 >
@@ -612,7 +612,7 @@ export default function Home() {
 
               {/* Version mobile - Grille verticale */}
               <div className="relative z-10 w-full px-4 block md:hidden">
-                <div className="max-w-sm mx-auto space-y-6">
+                <div className="max-w-xs mx-auto space-y-4">
                   {projects.slice(0, showAllProjects ? projects.length : 2).map((project, index) => (
                     <div
                       key={`project-mobile-${index}`}
