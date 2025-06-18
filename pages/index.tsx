@@ -11,6 +11,7 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import SkillCard from "../components/SkillCard";
 import ProfileCard from "../components/ProfileCard";
 import Timeline from "../components/Timeline";
+import Footer from "../components/Footer";
 
 /* TODO : Ajout mode nuit */
 
@@ -718,6 +719,9 @@ export default function Home() {
 
 
           </main>
+          
+          {/* Footer */}
+          <Footer />
         </div>
       </div>
     </div>

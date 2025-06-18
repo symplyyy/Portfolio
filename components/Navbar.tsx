@@ -125,34 +125,78 @@ export default function Navbar() {
             className="fixed inset-0 bg-[#CDFB52] z-[998]"
             style={{ position: 'fixed', height: '100vh' }}
           >
-            <motion.ul
-              className="flex flex-col items-center gap-8 text-2xl h-full justify-center"
-              initial="closed"
-              animate="open"
-              exit="closed"
-            >
-              {['Accueil', 'Projets', 'Competences', 'Parcours'].map((item, i) => (
-                <motion.li
-                  key={item}
-                  variants={{
-                    open: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { delay: i * 0.1 }
-                    },
-                    closed: { opacity: 0, y: 20 }
-                  }}
+            <div className="flex flex-col items-center h-full justify-center">
+              <motion.ul
+                className="flex flex-col items-center gap-8 text-2xl mb-12"
+                initial="closed"
+                animate="open"
+                exit="closed"
+              >
+                {['Accueil', 'Projets', 'Competences', 'Parcours'].map((item, i) => (
+                  <motion.li
+                    key={item}
+                    variants={{
+                      open: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { delay: i * 0.1 }
+                      },
+                      closed: { opacity: 0, y: 20 }
+                    }}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <NavLink
+                      href={`#${item.toLowerCase()}`}
+                      className="text-gray-800 hover:text-[#5A1441]"
+                    >
+                      {item}
+                    </NavLink>
+                  </motion.li>
+                ))}
+              </motion.ul>
+
+              {/* Icônes sociales dans le menu mobile */}
+              <motion.div
+                className="flex gap-6"
+                variants={{
+                  open: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { delay: 0.5 }
+                  },
+                  closed: { opacity: 0, y: 20 }
+                }}
+                initial="closed"
+                animate="open"
+                exit="closed"
+              >
+                <a 
+                  href="https://github.com/symplyyy" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-gray-800/10 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-800/20 transition-all duration-300 hover:scale-110 transform"
                   onClick={() => setIsOpen(false)}
                 >
-                  <NavLink
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-800 hover:text-[#5A1441]"
-                  >
-                    {item}
-                  </NavLink>
-                </motion.li>
-              ))}
-            </motion.ul>
+                  <FaGithub size={24} />
+                </a>
+                <a 
+                  href="https://www.linkedin.com/in/tim%C3%A9o-so%C3%ABte-5644b8210/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-gray-800/10 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-800/20 transition-all duration-300 hover:scale-110 transform"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <FaLinkedinIn size={24} />
+                </a>
+                <a 
+                  href="mailto:timeosoete.dev@gmail.com"
+                  className="w-12 h-12 bg-gray-800/10 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-800/20 transition-all duration-300 hover:scale-110 transform"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <HiOutlineMail size={24} />
+                </a>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -200,7 +244,7 @@ export default function Navbar() {
               <FaGithub size={24} />
             </a>
             <a 
-              href="https://linkedin.com/in/tonprofil" 
+              href="https://www.linkedin.com/in/tim%C3%A9o-so%C3%ABte-5644b8210/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className={`transition-all duration-300 hover:scale-110 transform will-change-transform ${isLight ? 'text-white' : 'text-gray-800'}`}
@@ -218,7 +262,7 @@ export default function Navbar() {
               <FaLinkedinIn size={24} />
             </a>
             <a 
-              href="mailto:tonemail@example.com"
+              href="mailto:timeosoete.dev@gmail.com"
               className={`transition-all duration-300 hover:scale-110 transform will-change-transform ${isLight ? 'text-white' : 'text-gray-800'}`}
               style={{ 
                 transform: 'translateZ(0)',

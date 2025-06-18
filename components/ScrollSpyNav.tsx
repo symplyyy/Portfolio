@@ -84,12 +84,43 @@ export const ScrollSpyNav: React.FC<ScrollSpyNavProps> = ({ sections, isLoading 
           }
           // Pour la section "projets" (gestion spéciale à cause du clipPath)
           else if (section.id === "projets") {
-            // Détection plus agressive pour la section projets
+            // Détection pour la section projets
+            const parcoursElement = document.getElementById("parcours");
+            const parcoursTop = parcoursElement ? parcoursElement.getBoundingClientRect().top + scrollPosition : sectionEnd;
+            
             if (rect.top <= viewportHeight * 0.6 || scrollPosition >= absoluteTop - viewportHeight * 0.7) {
+              // Vérifier si on n'est pas encore trop proche de la section parcours
+              if (scrollPosition < parcoursTop - viewportHeight * 0.4) {
+                setActiveSection(section.id);
+                const sectionStart = absoluteTop - viewportHeight * 0.7;
+                // La section se termine quand on arrive près de parcours
+                const effectiveSectionEnd = parcoursTop - viewportHeight * 0.4;
+                const sectionLength = effectiveSectionEnd - sectionStart;
+                const currentProgress = (scrollPosition - sectionStart) / sectionLength;
+                setProgress(Math.max(0, Math.min(1, currentProgress)));
+                return;
+              }
+            }
+          }
+          // Pour la section "parcours" (dernière section)
+          else if (section.id === "parcours") {
+            // Condition pour détecter l'entrée dans parcours
+            if (rect.top <= viewportHeight * 0.6) {
               setActiveSection(section.id);
-              const sectionStart = absoluteTop - viewportHeight * 0.7;
-              const sectionLength = sectionEnd - sectionStart;
-              const currentProgress = (scrollPosition - sectionStart) / sectionLength;
+              const sectionStart = absoluteTop - viewportHeight * 0.4;
+              
+              // Pour la section parcours, calculer la fin en excluant le footer
+              const footerElement = document.querySelector('footer');
+              let realSectionEnd;
+              if (footerElement) {
+                realSectionEnd = footerElement.getBoundingClientRect().top + scrollPosition;
+              } else {
+                // Fallback: utiliser la fin de l'élément parcours
+                realSectionEnd = absoluteTop + rect.height;
+              }
+              
+              const sectionLength = realSectionEnd - sectionStart;
+              const currentProgress = Math.max(0, (scrollPosition - sectionStart) / sectionLength);
               setProgress(Math.max(0, Math.min(1, currentProgress)));
               return;
             }
