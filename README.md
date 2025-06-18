@@ -12,7 +12,7 @@ Portfolio personnel développé avec Next.js, présentant mes compétences et pr
 
 1. **Clonez le projet**
    ```bash
-   git clone [URL_DU_REPO]
+   git clone https://github.com/symplyyy/Portfolio.git
    cd Portfolio
    ```
 
