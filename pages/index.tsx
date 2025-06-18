@@ -408,7 +408,7 @@ export default function Home() {
             >
               <div className="relative mb-4 md:mb-16 pt-12 md:pt-0">
                 <ScrollFloat
-                  containerClassName="text-[#6299CE] text-[5rem] pb-[0.5rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                  containerClassName="text-[#6299CE] text-[5rem] pb-[0.5rem] sm:text-[4rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
                 >
                   COMPÉTENCES
                 </ScrollFloat>
@@ -489,7 +489,7 @@ export default function Home() {
               
               <div className="relative mb-4 md:mb-16">
                 <ScrollFloat
-                  containerClassName="text-white text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                  containerClassName="text-white text-[5rem] pb-[1rem] sm:text-[4rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
                 >
                   MES PROJETS
                 </ScrollFloat>
@@ -700,7 +700,7 @@ export default function Home() {
             >
               <div className="relative mb-4 md:mb-16">
                 <ScrollFloat
-                  containerClassName="text-[#0F172A] text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                  containerClassName="text-[#0F172A] text-[5rem] pb-[1rem] sm:text-[4rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
                 >
                   PARCOURS
                 </ScrollFloat>
