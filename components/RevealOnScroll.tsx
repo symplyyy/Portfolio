@@ -20,7 +20,7 @@ const RevealOnScroll: React.FC<RevealOnScrollProps> = ({ children, delay = 0, cl
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
 
     if (currentElement) {

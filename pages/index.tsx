@@ -10,6 +10,7 @@ import { ScrollSpyNav } from "@/components/ScrollSpyNav";
 import RevealOnScroll from "../components/RevealOnScroll";
 import SkillCard from "../components/SkillCard";
 import ProfileCard from "../components/ProfileCard";
+import Timeline from "../components/Timeline";
 
 /* TODO : Ajout mode nuit */
 
@@ -289,7 +290,7 @@ export default function Home() {
 
             <div
               ref={parallaxRef}
-              className={`relative z-[2] flex flex-col justify-center items-center px-4 md:h-auto sm:mt-50 mt-0 md:mt-5 h-auto py-8 md:py-0 md:h-screen ${
+              className={`relative z-[2] flex flex-col justify-center items-center px-4 md:h-auto sm:mt-50 mt-0 md:mt-5 h-screen -mt-20 md:mt-0 ${
                 !isLoading ? 'zoom-in' : 'opacity-0 scale-50'
               }`}
             >
@@ -315,7 +316,7 @@ export default function Home() {
           <main>
             <section 
 
-              className={`mt-0 px-4 md:px-6 pb-0 md:pb-10 blackskin w-full mb-2 max-w-8xl mx-auto flex flex-col md:flex-row justify-start md:justify-center items-start md:items-start gap-8 md:gap-0 transition-all duration-1000 delay-500 ${
+              className={`mt-0 px-4 md:px-6 pb-0 md:pb-10 blackskin w-full mb-2 max-w-8xl mx-auto flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-0 transition-all duration-1000 delay-500 ${
                 !isLoading ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`} 
               style={{ position: 'relative', zIndex: 20 }}
@@ -412,7 +413,7 @@ export default function Home() {
                 </ScrollFloat>
               </div>
               
-              <div className="relative z-10 bg-[#6299CE]/80 backdrop-blur-sm rounded-full px-4 md:px-8 mt-10 py-1.5 md:py-3 shadow-lg mb-8 md:mb-16">
+              <div className="relative z-10 bg-[#2f6faa]/80 backdrop-blur-sm rounded-full px-4 md:px-8 mt-10 py-1.5 md:py-3 shadow-lg mb-8 md:mb-16">
                 <p className="text-white text-center text-sm md:text-lg lg:text-xl font-medium">
                   Chaque carte détaille mes compétences clés.
                 </p>
@@ -691,14 +692,28 @@ export default function Home() {
 
             </section>
 
-            <section className="pb-100">
+            {/* Section Parcours */}
+            <section 
+              id="parcours"
+              className="relative blackskin w-full flex items-center justify-center flex-col pt-5 md:pt-10 pb-20"
+            >
               <div className="relative mb-4 md:mb-16">
                 <ScrollFloat
-                  containerClassName="text-white text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                  containerClassName="text-[#0F172A] text-[1.8rem] pb-[1rem] sm:text-[2rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
                 >
                   PARCOURS
                 </ScrollFloat>
               </div>
+              
+              <div className="relative z-10 bg-[#C084FC]/80 backdrop-blur-sm rounded-full px-4 md:px-8 mt-10 py-1.5 md:py-3 shadow-lg mb-8 md:mb-16">
+                <p className="text-white text-center text-sm md:text-lg lg:text-xl font-medium">
+                  Mon cheminement académique et professionnel
+                </p>
+              </div>
+
+              {/* Timeline Container */}
+              <Timeline />
+
             </section>
 
 

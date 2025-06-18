@@ -45,9 +45,9 @@ interface ProjectShowcaseProps {
 
 const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
   return (
-    <div className="relative z-10 w-[95%] sm:w-[85%] lg:w-[80%] mx-auto px-2 sm:px-4">
+    <div className="relative z-10 w-[90%] sm:w-[80%] lg:w-[75%] mx-auto px-2 sm:px-4">
       {/* Grille de projets */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {projects.map((project, index) => (
           <motion.div
             key={project.title}
@@ -80,21 +80,21 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
             </div>
 
             {/* Contenu du projet */}
-            <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-              <h3 className="text-2xl font-bold mb-2 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+            <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-5 text-white">
+              <h3 className="text-lg md:text-xl font-bold mb-2 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
                 {project.title}
               </h3>
               
-              <p className="text-sm transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+              <p className="text-xs md:text-sm transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
                 {project.description}
               </p>
 
               {/* Technologies */}
-              <div className="flex flex-wrap gap-2 mt-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+              <div className="flex flex-wrap gap-1.5 md:gap-2 mt-3 md:mt-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className={`px-3 py-1 backdrop-blur-sm rounded-full text-xs font-medium ${
+                    className={`px-2 md:px-3 py-0.5 md:py-1 backdrop-blur-sm rounded-full text-xs font-medium ${
                       techColors[tech] || 'bg-white/20'
                     }`}
                   >
@@ -109,10 +109,10 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
                   href={project.projectUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center mt-4 text-sm font-medium transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300 hover:text-[#5C97CE]"
+                  className="inline-flex items-center mt-3 md:mt-4 text-xs md:text-sm font-medium transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300 hover:text-[#5C97CE]"
                 >
                   Voir le projet
-                  <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="ml-1 md:ml-2 h-3 md:h-4 w-3 md:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </a>
