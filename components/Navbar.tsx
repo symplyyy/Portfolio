@@ -1,6 +1,6 @@
 'use client';
 
-import NavLink from "./Navlink";
+
 import Image from "next/image";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
@@ -16,6 +16,49 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const navRef = useRef(null);
   const isLight = useNavbarColorScheme(isMobile);
+
+  // Fonction de navigation fluide vers les sections
+  const handleNavigation = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset;
+      const startPosition = window.pageYOffset;
+      const distance = offsetPosition - startPosition;
+      const duration = 1000;
+      let start: number | null = null;
+
+      function animation(currentTime: number) {
+        if (start === null) start = currentTime;
+        const timeElapsed = currentTime - start;
+        const progress = Math.min(timeElapsed / duration, 1);
+
+        const easeOutQuint = (t: number) => {
+          return 1 - Math.pow(1 - t, 5);
+        };
+
+        const run = startPosition + distance * easeOutQuint(progress);
+        window.scrollTo(0, run);
+
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation);
+        }
+      }
+
+      requestAnimationFrame(animation);
+    }
+  };
+
+  // Mapping des noms d'affichage vers les IDs réels
+  const getSectionId = (displayName: string): string => {
+    const mapping: { [key: string]: string } = {
+      'Accueil': 'accueil',
+      'Compétences': 'competences',
+      'Projets': 'projets',
+      'Parcours': 'parcours'
+    };
+    return mapping[displayName] || displayName.toLowerCase();
+  };
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -132,7 +175,7 @@ export default function Navbar() {
                 animate="open"
                 exit="closed"
               >
-                {['Accueil', 'Projets', 'Competences', 'Parcours'].map((item, i) => (
+                {['Accueil', 'Compétences', 'Projets', 'Parcours'].map((item, i) => (
                   <motion.li
                     key={item}
                     variants={{
@@ -143,14 +186,16 @@ export default function Navbar() {
                       },
                       closed: { opacity: 0, y: 20 }
                     }}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      handleNavigation(getSectionId(item));
+                      setIsOpen(false);
+                    }}
                   >
-                    <NavLink
-                      href={`#${item.toLowerCase()}`}
-                      className="text-gray-800 hover:text-[#5A1441]"
+                    <button
+                      className="relative px-3 py-2 text-sm uppercase italic tracking-widest transition-all duration-300 rounded-xl hover:bg-[#5A1441] hover:text-white hover:scale-105 hover:shadow-md text-gray-800"
                     >
                       {item}
-                    </NavLink>
+                    </button>
                   </motion.li>
                 ))}
               </motion.ul>
@@ -213,12 +258,12 @@ export default function Navbar() {
             <ul className="flex gap-6 items-center">
               {['Accueil', 'Compétences', 'Projets',  'Parcours'].map((item) => (
                 <li key={item}>
-                  <NavLink 
-                    href={`#${item.toLowerCase()}`} 
-                    className={isLight ? 'text-white' : 'text-gray-800'}
+                  <button 
+                    onClick={() => handleNavigation(getSectionId(item))}
+                    className={`relative px-3 py-2 text-sm uppercase italic tracking-widest transition-all duration-300 rounded-xl hover:bg-[#CDFB52] hover:!text-black hover:scale-105 hover:shadow-md ${isLight ? 'text-white' : 'text-gray-800'}`}
                   >
                     {item}
-                  </NavLink>
+                  </button>
                 </li>
               ))}
             </ul>

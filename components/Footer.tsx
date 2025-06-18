@@ -3,6 +3,38 @@ import Image from 'next/image';
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 
+// Fonction de navigation fluide vers les sections
+const handleNavigation = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset;
+    const startPosition = window.pageYOffset;
+    const distance = offsetPosition - startPosition;
+    const duration = 1000;
+    let start: number | null = null;
+
+    function animation(currentTime: number) {
+      if (start === null) start = currentTime;
+      const timeElapsed = currentTime - start;
+      const progress = Math.min(timeElapsed / duration, 1);
+
+      const easeOutQuint = (t: number) => {
+        return 1 - Math.pow(1 - t, 5);
+      };
+
+      const run = startPosition + distance * easeOutQuint(progress);
+      window.scrollTo(0, run);
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    }
+
+    requestAnimationFrame(animation);
+  }
+};
+
 const Footer: React.FC = () => {
   return (
     <footer className="relative bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400 pt-12 md:pt-20 pb-6 md:pb-8 overflow-hidden">
@@ -19,26 +51,26 @@ const Footer: React.FC = () => {
           {/* Left side - Navigation links */}
           <div className="mb-6 md:mb-0 w-full md:w-auto">
             <nav className="flex flex-row md:flex-col justify-center md:justify-start space-x-6 md:space-x-0 md:space-y-3">
-              <a href="#accueil" className="text-gray-700 hover:text-gray-900 text-sm md:text-lg font-medium transition-all duration-500 ease-out group cursor-pointer">
+              <button onClick={() => handleNavigation('accueil')} className="text-gray-700 hover:text-gray-900 text-sm md:text-lg font-medium transition-all duration-500 ease-out group cursor-pointer">
                 <span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-2">
                   Accueil
                 </span>
-              </a>
-              <a href="#competences" className="text-gray-700 hover:text-gray-900 text-sm md:text-lg font-medium transition-all duration-500 ease-out group cursor-pointer">
+              </button>
+              <button onClick={() => handleNavigation('competences')} className="text-gray-700 hover:text-gray-900 text-sm md:text-lg font-medium transition-all duration-500 ease-out group cursor-pointer">
                 <span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-2">
                   Compétences
                 </span>
-              </a>
-              <a href="#projets" className="text-gray-700 hover:text-gray-900 text-sm md:text-lg font-medium transition-all duration-500 ease-out group cursor-pointer">
+              </button>
+              <button onClick={() => handleNavigation('projets')} className="text-gray-700 hover:text-gray-900 text-sm md:text-lg font-medium transition-all duration-500 ease-out group cursor-pointer">
                 <span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-2">
                   Projets
                 </span>
-              </a>
-              <a href="#parcours" className="text-gray-700 hover:text-gray-900 text-sm md:text-lg font-medium transition-all duration-500 ease-out group cursor-pointer">
+              </button>
+              <button onClick={() => handleNavigation('parcours')} className="text-gray-700 hover:text-gray-900 text-sm md:text-lg font-medium transition-all duration-500 ease-out group cursor-pointer">
                 <span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-2">
                   Parcours
                 </span>
-              </a>
+              </button>
             </nav>
           </div>
 
