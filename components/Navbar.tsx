@@ -128,7 +128,7 @@ export default function Navbar() {
       {isMobile && (
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative z-[999] mt-7"
+          className="relative z-[999] mt-7 cursor-pointer"
           aria-label="Menu"
         >
           <div className="w-8 h-8 relative">
@@ -192,7 +192,7 @@ export default function Navbar() {
                     }}
                   >
                     <button
-                      className="relative px-3 py-2 text-sm uppercase italic tracking-widest transition-all duration-300 rounded-xl hover:bg-[#5A1441] hover:text-white hover:scale-105 hover:shadow-md text-gray-800"
+                      className="relative px-3 py-2 text-sm uppercase italic tracking-widest transition-all duration-300 rounded-xl hover:bg-[#5A1441] hover:text-white hover:scale-105 hover:shadow-md text-gray-800 cursor-pointer"
                     >
                       {item}
                     </button>
@@ -260,7 +260,7 @@ export default function Navbar() {
                 <li key={item}>
                   <button 
                     onClick={() => handleNavigation(getSectionId(item))}
-                    className={`relative px-3 py-2 text-sm uppercase italic tracking-widest transition-all duration-300 rounded-xl hover:bg-[#CDFB52] hover:!text-black hover:scale-105 hover:shadow-md ${isLight ? 'text-white' : 'text-gray-800'}`}
+                    className={`relative px-3 py-2 text-sm uppercase italic tracking-widest transition-all duration-300 rounded-xl hover:bg-[#CDFB52] hover:!text-black hover:scale-105 hover:shadow-md cursor-pointer ${isLight ? 'text-white' : 'text-gray-800'}`}
                   >
                     {item}
                   </button>

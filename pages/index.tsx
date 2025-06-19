@@ -55,7 +55,7 @@ const projects = [
   {
     title: "Plugin mode de jeu 'Invisible' CS2",
     description: "Plugin permettant d'implémenter un mode jeu se basant sur l'invisibilité dans Counter-Strike 2 sur serveur dédié.",
-    imageUrl: "/images/projects/mockups/conso.png",
+    imageUrl: "/images/projects/mockups/invisible.png",
     projectUrl: "https://github.com/symplyyy/InvisiblePluginCS2",
     technologies: ["C#"]
   },
