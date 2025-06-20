@@ -76,7 +76,238 @@ export default function Home() {
   const layer2Ref = useRef<HTMLDivElement>(null);
   const layer3Ref = useRef<HTMLDivElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
+  
+  // États et refs pour le drag optimisé
+  const [isDragging, setIsDragging] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const dragStateRef = useRef({
+    isDragging: false,
+    startX: 0,
+    currentOffset: 0,
+    rafId: null as number | null
+  });
 
+  // Fonction pour appliquer le transform avec RAF
+  const updateCarouselTransform = (offset: number) => {
+    if (carouselRef.current) {
+      const transform = `translate3d(calc(${currentIndex * -33.333}% - ${currentIndex * 1.5}rem + ${offset}px), 0, 0)`;
+      carouselRef.current.style.transform = transform;
+    }
+  };
+
+  // Fonctions pour gérer le drag optimisé
+  const handleMouseDown = (e: React.MouseEvent) => {
+    // Ne pas démarrer le drag si on clique sur un lien ou un bouton
+    const target = e.target as HTMLElement;
+    if (target.closest('a') || target.closest('button')) {
+      return;
+    }
+    
+    dragStateRef.current.isDragging = true;
+    dragStateRef.current.startX = e.clientX;
+    dragStateRef.current.currentOffset = 0;
+    
+    setIsDragging(true);
+    
+    // Prévenir la sélection de texte pendant le drag
+    e.preventDefault();
+    document.body.style.userSelect = 'none';
+    document.body.style.cursor = 'grabbing';
+    
+    // Désactiver la transition pendant le drag
+    if (carouselRef.current) {
+      carouselRef.current.style.transition = 'none';
+    }
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!dragStateRef.current.isDragging) return;
+    
+    const currentX = e.clientX;
+    const diff = currentX - dragStateRef.current.startX;
+    
+    // Limiter le drag aux limites du carousel
+    const maxIndex = projects.length <= 3 ? 0 : projects.length - 3;
+    let limitedDiff = diff;
+    
+    // Résistance aux bords
+    if (currentIndex === 0 && diff > 0) {
+      limitedDiff = diff * 0.3;
+    } else if (currentIndex >= maxIndex && diff < 0) {
+      limitedDiff = diff * 0.3;
+    }
+    
+    dragStateRef.current.currentOffset = limitedDiff;
+    
+    // Utiliser RAF pour l'animation fluide
+    if (dragStateRef.current.rafId) {
+      cancelAnimationFrame(dragStateRef.current.rafId);
+    }
+    
+    dragStateRef.current.rafId = requestAnimationFrame(() => {
+      updateCarouselTransform(limitedDiff);
+    });
+  };
+
+  const handleMouseUp = () => {
+    if (!dragStateRef.current.isDragging) return;
+    
+    dragStateRef.current.isDragging = false;
+    setIsDragging(false);
+    
+    document.body.style.userSelect = '';
+    document.body.style.cursor = '';
+    
+    // Réactiver la transition
+    if (carouselRef.current) {
+      carouselRef.current.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    }
+    
+    // Calculer le nouvel index - limitation à 1 projet à la fois
+    const threshold = 50; // Seuil réduit pour plus de sensibilité
+    const maxIndex = projects.length <= 3 ? 0 : projects.length - 3;
+    const offset = dragStateRef.current.currentOffset;
+    
+    if (Math.abs(offset) > threshold) {
+      if (offset > 0 && currentIndex > 0) {
+        // Drag vers la droite - reculer d'exactement 1 projet
+        setCurrentIndex(currentIndex - 1);
+      } else if (offset < 0 && currentIndex < maxIndex) {
+        // Drag vers la gauche - avancer d'exactement 1 projet
+        setCurrentIndex(currentIndex + 1);
+      }
+    }
+    
+    // Reset de l'offset
+    dragStateRef.current.currentOffset = 0;
+    
+    // Annuler le RAF en cours
+    if (dragStateRef.current.rafId) {
+      cancelAnimationFrame(dragStateRef.current.rafId);
+      dragStateRef.current.rafId = null;
+    }
+    
+    // Remettre le transform à sa position normale
+    updateCarouselTransform(0);
+  };
+
+  // Fonctions pour le touch (mobile) - optimisées
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('a') || target.closest('button')) {
+      return;
+    }
+    
+    dragStateRef.current.isDragging = true;
+    dragStateRef.current.startX = e.touches[0].clientX;
+    dragStateRef.current.currentOffset = 0;
+    
+    setIsDragging(true);
+    
+    // Désactiver la transition pendant le drag
+    if (carouselRef.current) {
+      carouselRef.current.style.transition = 'none';
+    }
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    if (!dragStateRef.current.isDragging) return;
+    
+    const currentX = e.touches[0].clientX;
+    const diff = currentX - dragStateRef.current.startX;
+    
+    // Limiter le drag aux limites du carousel
+    const maxIndex = projects.length <= 3 ? 0 : projects.length - 3;
+    let limitedDiff = diff;
+    
+    // Résistance aux bords
+    if (currentIndex === 0 && diff > 0) {
+      limitedDiff = diff * 0.3;
+    } else if (currentIndex >= maxIndex && diff < 0) {
+      limitedDiff = diff * 0.3;
+    }
+    
+    dragStateRef.current.currentOffset = limitedDiff;
+    
+    // Empêcher le scroll de la page pendant le drag horizontal
+    if (Math.abs(diff) > 10) {
+      e.preventDefault();
+    }
+    
+    // Utiliser RAF pour l'animation fluide
+    if (dragStateRef.current.rafId) {
+      cancelAnimationFrame(dragStateRef.current.rafId);
+    }
+    
+    dragStateRef.current.rafId = requestAnimationFrame(() => {
+      updateCarouselTransform(limitedDiff);
+    });
+  };
+
+  const handleTouchEnd = () => {
+    if (!dragStateRef.current.isDragging) return;
+    
+    dragStateRef.current.isDragging = false;
+    setIsDragging(false);
+    
+    // Réactiver la transition
+    if (carouselRef.current) {
+      carouselRef.current.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    }
+    
+    // Calculer le nouvel index - limitation à 1 projet à la fois
+    const threshold = 40; // Plus sensible sur mobile
+    const maxIndex = projects.length <= 3 ? 0 : projects.length - 3;
+    const offset = dragStateRef.current.currentOffset;
+    
+    if (Math.abs(offset) > threshold) {
+      if (offset > 0 && currentIndex > 0) {
+        // Drag vers la droite - reculer d'exactement 1 projet
+        setCurrentIndex(currentIndex - 1);
+      } else if (offset < 0 && currentIndex < maxIndex) {
+        // Drag vers la gauche - avancer d'exactement 1 projet
+        setCurrentIndex(currentIndex + 1);
+      }
+    }
+    
+    // Reset de l'offset
+    dragStateRef.current.currentOffset = 0;
+    
+    // Annuler le RAF en cours
+    if (dragStateRef.current.rafId) {
+      cancelAnimationFrame(dragStateRef.current.rafId);
+      dragStateRef.current.rafId = null;
+    }
+    
+    // Remettre le transform à sa position normale
+    updateCarouselTransform(0);
+  };
+
+  // Event listeners pour le drag optimisé
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove, { passive: false });
+      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+      document.addEventListener('touchend', handleTouchEnd);
+      
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('touchmove', handleTouchMove);
+        document.removeEventListener('touchend', handleTouchEnd);
+      };
+    }
+  }, [isDragging, currentIndex]);
+
+  // Cleanup RAF on unmount
+  useEffect(() => {
+    return () => {
+      if (dragStateRef.current.rafId) {
+        cancelAnimationFrame(dragStateRef.current.rafId);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if ("scrollRestoration" in history) {
@@ -578,12 +809,15 @@ export default function Home() {
                     }}
                   >
                     <div 
-                      className="flex gap-6 will-change-transform"
+                      ref={carouselRef}
+                      className="flex gap-6 will-change-transform cursor-grab active:cursor-grabbing"
                       style={{
                         transform: `translate3d(calc(${currentIndex * -33.333}% - ${currentIndex * 1.5}rem), 0, 0)`,
-                        transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                        transition: isDragging ? 'none' : 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                         backfaceVisibility: 'hidden'
                       }}
+                      onMouseDown={handleMouseDown}
+                      onTouchStart={handleTouchStart}
                     >
                       {projects.map((project, index) => (
                         <div
