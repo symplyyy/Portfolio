@@ -325,12 +325,12 @@ export default function Home() {
               <div className="flex-1 space-y-2 max-w-full md:max-w-[800px] z-[1] scale-[0.8] md:scale-100 origin-top">
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
                   <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
-                    Je m&apos;appelle Timéo
+                    Je m&apos;appelle Timéo Soëte
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
                   <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
-                    je donne vie aux idées sur le web.
+                    je donne vie à vos idées sur le web.
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
