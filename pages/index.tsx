@@ -605,8 +605,8 @@ export default function Home() {
                 />
               </div>
             </section>
-            <section className="relative py-3 whiteskin overflow-x-hidden mt-[-3rem]" id="diagonal-section">
-              <div className="space-y-[-40px] sm:space-y-[-60px] md:space-y-[-80px] lg:space-y-[-120px]">
+            <section className="relative py-2 sm:py-3 md:py-4 lg:py-6 whiteskin overflow-x-hidden mt-[-2rem] sm:mt-[-2.5rem] md:mt-[-3rem]" id="diagonal-section">
+              <div className="space-y-[-30px] xs:space-y-[-35px] sm:space-y-[-45px] md:space-y-[-60px] lg:space-y-[-80px] xl:space-y-[-120px]">
                 <DiagonalRevealText 
                   text="FRONTEND & BACKEND" 
                   backgroundColor="#69B7EE"
@@ -634,28 +634,28 @@ export default function Home() {
               </div>
             </section>
 
-            {/* Nouveau bloc bleu */}
+            {/* Section Compétences */}
             <section 
               id="competences"
-              className="relative blackskin w-full h-auto -mt-40 md:-mt-60 flex items-center justify-center flex-col pt-[5rem] md:pt-[15rem] pb-15"
+              className="relative blackskin w-full h-auto -mt-32 xs:-mt-36 sm:-mt-40 md:-mt-50 lg:-mt-60 flex items-center justify-center flex-col pt-[4rem] xs:pt-[4.5rem] sm:pt-[5rem] md:pt-[8rem] lg:pt-[12rem] xl:pt-[15rem] pb-10 xs:pb-12 sm:pb-15 md:pb-20"
             >
-              <div className="relative mb-4 md:mb-16 pt-12 md:pt-0">
+              <div className="relative mb-3 xs:mb-4 sm:mb-6 md:mb-12 lg:mb-16 pt-8 xs:pt-10 sm:pt-12 md:pt-0">
                 <ScrollFloat
-                  containerClassName="text-[#6299CE] text-[5rem] pb-[0.5rem] sm:text-[4rem] md:text-[6rem] font-black tracking-wider translate-y-12 md:translate-y-20"
+                  containerClassName="text-[#6299CE] text-[3rem] xs:text-[3.5rem] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] font-black tracking-wider translate-y-8 xs:translate-y-10 sm:translate-y-12 md:translate-y-16 lg:translate-y-20 pb-[0.5rem]"
                 >
                   COMPÉTENCES
                 </ScrollFloat>
               </div>
               
-              <div className="relative z-10 bg-[#2f6faa]/80 backdrop-blur-sm rounded-full px-4 md:px-8 mt-10 py-1.5 md:py-3 shadow-lg mb-8 md:mb-16">
-                <p className="text-white text-center text-sm md:text-lg lg:text-xl font-medium">
+              <div className="relative z-10 bg-[#2f6faa]/80 backdrop-blur-sm rounded-full px-3 xs:px-4 sm:px-6 md:px-8 mt-6 xs:mt-8 sm:mt-10 py-1 xs:py-1.5 sm:py-2 md:py-3 shadow-lg mb-6 xs:mb-8 sm:mb-12 md:mb-16 mx-4">
+                <p className="text-white text-center text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-relaxed">
                   Chaque carte détaille mes compétences clés.
                 </p>
               </div>
               
               {/* Cartes de compétences */}
-              <div className="relative z-10 w-[95%] sm:w-[85%] lg:w-[80%] mx-auto px-2 sm:px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 auto-rows-fr">
+              <div className="relative z-10 w-full max-w-[95%] xs:max-w-[90%] sm:max-w-[85%] md:max-w-[90%] lg:max-w-[80%] xl:max-w-[75%] mx-auto px-2 xs:px-3 sm:px-4 md:px-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-5 md:gap-6 lg:gap-8 auto-rows-fr">
                   
                   <RevealOnScroll delay={0} className="w-full h-full">
                     <SkillCard
@@ -663,7 +663,7 @@ export default function Home() {
                       description="Création d'interfaces utilisateur modernes et réactives avec les dernières technologies web."
                       hideDescriptionOnMobile={true}
                       iconSvg={(
-                        <svg className="w-6 sm:w-8 h-6 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                       )}
@@ -679,8 +679,8 @@ export default function Home() {
                       description="Développement d'applications serveur avec PHP et Node.js, gestion de bases de données relationnelles."
                       hideDescriptionOnMobile={true}
                       iconSvg={(
-                        <svg className="w-6 sm:w-8 h-6 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                        <svg className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 712-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
                         </svg>
                       )}
                       technologies={["C#", "PHP", "Laravel", "Symfony", "Node.js", "PostgreSQL"]}
@@ -689,13 +689,13 @@ export default function Home() {
                     />
                   </RevealOnScroll>
 
-                  <RevealOnScroll delay={300} className="w-full h-full md:col-span-2 lg:col-span-1">
+                  <RevealOnScroll delay={300} className="w-full h-full sm:col-span-2 lg:col-span-1">
                     <SkillCard
                       title="Autre"
                       description="Maîtrise des outils de design, de gestion de version et de développement de jeux pour des projets créatifs complets."
                       hideDescriptionOnMobile={true}
                       iconSvg={(
-                        <svg className="w-6 sm:w-8 h-6 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                       )}

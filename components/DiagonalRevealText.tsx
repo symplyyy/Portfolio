@@ -26,25 +26,28 @@ export default function DiagonalRevealText({
   return (
     <div 
       ref={ref}
-      className="relative w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[330px] overflow-hidden"
+      className="relative w-full h-[100px] xs:h-[120px] sm:h-[140px] md:h-[180px] lg:h-[250px] xl:h-[330px] overflow-hidden"
       style={{ zIndex: 10 - index }}
     >
       {/* Conteneur de la bande inclinée avec gestion du débordement */}
-      <div className="absolute inset-0 w-[120%] -left-[10%] sm:w-[110%] sm:-left-[5%] md:w-full md:left-0">
+      <div className="absolute inset-0 w-[130%] -left-[15%] xs:w-[125%] xs:-left-[12.5%] sm:w-[115%] sm:-left-[7.5%] md:w-[105%] md:-left-[2.5%] lg:w-full lg:left-0">
         {/* Bande inclinée */}
         <div
           style={{
             backgroundColor,
-            clipPath: `polygon(0 ${angle * 0.6}px, 100% 0, 100% calc(100% - ${angle * 0.6}px), 0 100%)`,
+            clipPath: `polygon(0 ${Math.max(angle * 0.4, 20)}px, 100% 0, 100% calc(100% - ${Math.max(angle * 0.4, 20)}px), 0 100%)`,
           }}
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-center px-2 sm:px-4 md:px-6 lg:px-8"
         >
           <span
-            className="text-white font-black whitespace-nowrap tracking-wider text-center leading-none text-[1.2rem] sm:text-[1.8rem] md:text-[3rem] lg:text-[6rem]"
+            className="text-white font-black tracking-wider text-center leading-none text-[1rem] xs:text-[1.1rem] sm:text-[1.4rem] md:text-[2.2rem] lg:text-[4rem] xl:text-[6rem]"
             style={{
-              transform: `rotate(${rotationDeg * 0.3}deg)`,
-              maxWidth: '90%',
+              transform: `rotate(${rotationDeg * 0.2}deg)`,
+              maxWidth: '95%',
               wordBreak: 'keep-all',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
             }}
           >
             {text}

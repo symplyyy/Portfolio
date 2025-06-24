@@ -29,6 +29,9 @@ export const CardContainer = ({
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
+    // Désactiver l'effet 3D sur mobile et tablette
+    if (window.innerWidth < 1024) return;
+    
     const { left, top, width, height } =
       containerRef.current.getBoundingClientRect();
     const x = (e.clientX - left - width / 2) / 25;
@@ -37,6 +40,9 @@ export const CardContainer = ({
   };
 
   const handleMouseEnter = () => {
+    // Désactiver l'effet 3D sur mobile et tablette
+    if (window.innerWidth < 1024) return;
+    
     setIsMouseEntered(true);
     if (!containerRef.current) return;
   };
@@ -50,11 +56,11 @@ export const CardContainer = ({
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
         className={cn(
-          "py-2 flex items-center justify-center",
+          "py-1 xs:py-2 flex items-center justify-center w-full h-full",
           containerClassName
         )}
         style={{
-          perspective: "1000px",
+          perspective: window.innerWidth >= 1024 ? "1000px" : "none",
         }}
       >
         <div
@@ -63,11 +69,11 @@ export const CardContainer = ({
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           className={cn(
-            "flex items-center justify-center relative transition-all duration-200 ease-linear",
+            "flex items-center justify-center relative transition-all duration-200 ease-linear w-full h-full",
             className
           )}
           style={{
-            transformStyle: "preserve-3d",
+            transformStyle: window.innerWidth >= 1024 ? "preserve-3d" : "flat",
           }}
         >
           {children}
