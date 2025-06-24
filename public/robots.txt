@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Exclure les images décoratives de l'indexation Google Images
+User-agent: Googlebot-Image
+Disallow: /images/header/
+Disallow: /images/header/clouds*
+Disallow: /images/header/minicloud*
+Disallow: /images/header/background.png
+
+# Permettre l'indexation des images importantes
+Allow: /images/logo_portfolio.png
+Allow: /images/logo_portfolio_black.png
+Allow: /images/avatar.png
+Allow: /images/projects/
+Allow: /favicon.ico
+
+# Exclure les fichiers système
+Disallow: /_next/
+Disallow: /api/
+Disallow: /*.json
+Disallow: /*.js
+Disallow: /*.css
+
+# Sitemap
+Sitemap: https://timeosoete.com/sitemap.xml 

@@ -1,0 +1,20 @@
+# Empêcher l'indexation des images décoratives
+<FilesMatch "\.(png|jpg|jpeg|gif|webp)$">
+    <If "%{REQUEST_URI} =~ m#/images/header/#">
+        Header set X-Robots-Tag "noindex, nofollow"
+        Header set X-Robots-Tag "googlebot-image: noindex"
+    </If>
+</FilesMatch>
+
+# Permettre l'indexation des images importantes
+<FilesMatch "logo_portfolio|avatar|projects">
+    Header unset X-Robots-Tag
+</FilesMatch>
+
+# Sécurité et performance
+<IfModule mod_headers.c>
+    # Cache des images
+    <FilesMatch "\.(png|jpg|jpeg|gif|webp|svg|ico)$">
+        Header set Cache-Control "public, max-age=31536000"
+    </FilesMatch>
+</IfModule> 

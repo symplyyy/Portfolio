@@ -465,8 +465,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Portfolio - Timéo Soëte</title>
-        <meta name="description" content="Portfolio de Timéo Soëte - Développeur Web Frontend & Backend spécialisé en React, Next.js, PHP et technologies modernes." />
+        <title>Timéo Soëte | Développeur Web React, Next.js & PHP | Portfolio</title>
+        <meta name="description" content="Développeur Web Fullstack à Strasbourg. Spécialisé en React, Next.js & PHP, je crée des sites modernes, performants et responsive." />
       </Head>
       
       <div className="relative w-full h-full">
