@@ -26,11 +26,23 @@ export const CardContainer = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseEntered, setIsMouseEntered] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    
+    checkIsDesktop();
+    window.addEventListener('resize', checkIsDesktop);
+    
+    return () => {
+      window.removeEventListener('resize', checkIsDesktop);
+    };
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    // Désactiver l'effet 3D sur mobile et tablette
-    if (window.innerWidth < 1024) return;
+    if (!containerRef.current || !isDesktop) return;
     
     const { left, top, width, height } =
       containerRef.current.getBoundingClientRect();
@@ -40,8 +52,7 @@ export const CardContainer = ({
   };
 
   const handleMouseEnter = () => {
-    // Désactiver l'effet 3D sur mobile et tablette
-    if (window.innerWidth < 1024) return;
+    if (!isDesktop) return;
     
     setIsMouseEntered(true);
     if (!containerRef.current) return;
@@ -52,6 +63,7 @@ export const CardContainer = ({
     setIsMouseEntered(false);
     containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
   };
+  
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
@@ -60,7 +72,7 @@ export const CardContainer = ({
           containerClassName
         )}
         style={{
-          perspective: window.innerWidth >= 1024 ? "1000px" : "none",
+          perspective: isDesktop ? "1000px" : "none",
         }}
       >
         <div
@@ -73,7 +85,7 @@ export const CardContainer = ({
             className
           )}
           style={{
-            transformStyle: window.innerWidth >= 1024 ? "preserve-3d" : "flat",
+            transformStyle: isDesktop ? "preserve-3d" : "flat",
           }}
         >
           {children}
@@ -152,7 +164,6 @@ export const CardItem = ({
   );
 };
 
-// Create a hook to use the context
 export const useMouseEnter = () => {
   const context = useContext(MouseEnterContext);
   if (context === undefined) {
