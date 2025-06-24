@@ -497,14 +497,16 @@ export default function Home() {
               relative
               h-[55rem]
               sm:h-[60rem]
-              md:h-[90rem]
+              md:h-[75rem]
+              lg:h-[90rem]
               w-full
               z-[40]
               bg-center
               bg-no-repeat
               flex flex-col items-center
               pt-0
-              md:pt-[200px]
+              md:pt-[150px]
+              lg:pt-[200px]
               mb-0
               overflow-hidden
             "
@@ -531,7 +533,7 @@ export default function Home() {
                 alt="Portfolio logo"
                 width={1000}
                 height={400}
-                className="w-full max-w-[400px] sm:max-w-[600px] md:max-w-[1000px] mb-4 md:mb-25"
+                className="w-full max-w-[400px] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[1000px] mb-4 md:mb-25"
                 priority
               />
               <p className="text-whiteg z-[1] relative font-artegra text-xs sm:text-sm md:text-base tracking-widest font-medium text-center">
@@ -548,63 +550,63 @@ export default function Home() {
           <main>
             <section 
 
-              className={`mt-0 px-4 md:px-6 pb-0 md:pb-10 blackskin w-full mb-2 max-w-8xl mx-auto flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-0 transition-all duration-1000 delay-500 ${
+              className={`mt-0 px-4 md:px-6 pb-0 md:pb-10 blackskin w-full mb-2 max-w-8xl mx-auto flex flex-col md:flex-row lg:flex-row justify-center items-center md:items-start gap-8 md:gap-4 lg:gap-0 transition-all duration-1000 delay-500 ${
                 !isLoading ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`} 
               style={{ position: 'relative', zIndex: 20 }}
             >
-              <div className="flex-1 space-y-2 max-w-full md:max-w-[800px] z-[1] scale-[0.8] md:scale-100 origin-top">
+              <div className="flex-1 space-y-2 max-w-full md:max-w-[600px] lg:max-w-[800px] z-[1] scale-[0.8] md:scale-[0.9] lg:scale-100 origin-top">
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-2xl lg:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     Je m&apos;appelle Timéo Soëte,
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-2xl lg:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     je donne vie à vos idées sur le web.
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-2xl lg:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     Entre lignes de code et pixels bien
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-2xl lg:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     placés je conçois des sites modernes,
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-2xl lg:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     dynamiques et accessibles.
                   </p>
                 </BoxReveal>
                 <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                  <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
+                  <p className="bg-black text-white text-lg md:text-2xl lg:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                     Ce portfolio est ma vitrine,
                   </p>
                 </BoxReveal>
                 <div className="relative inline-block">
                   <BoxReveal boxColor={"#E5A4E1"} duration={0.5}>
-                    <p className="bg-black text-white text-lg md:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
+                    <p className="bg-black text-white text-lg md:text-2xl lg:text-3xl font-bold px-4 pr-8 md:pr-10 py-2 md:py-2.5 inline-block clip-triangle-right">
                       n&apos;hésitez pas à explorer !
                     </p>
                   </BoxReveal>
                 </div>
               </div>
 
-              <div className="md:ml-6 flex justify-center animate-float order-first md:order-last hidden md:flex">
+              <div className="md:ml-6 lg:ml-6 flex justify-center animate-float order-first md:order-last hidden md:flex">
                 <Image
                   src="/images/avatar.png"
                   alt="Développeur sur un nuage"
                   width={600}
                   height={600}
-                  className="w-[280px] md:w-[500px] max-w-full"
+                  className="w-[280px] md:w-[350px] lg:w-[500px] max-w-full"
                 />
               </div>
             </section>
             <section className="relative py-3 whiteskin overflow-x-hidden mt-[-3rem]" id="diagonal-section">
-              <div className="space-y-[-40px] sm:space-y-[-60px] md:space-y-[-120px]">
+              <div className="space-y-[-40px] sm:space-y-[-60px] md:space-y-[-80px] lg:space-y-[-120px]">
                 <DiagonalRevealText 
                   text="FRONTEND & BACKEND" 
                   backgroundColor="#69B7EE"

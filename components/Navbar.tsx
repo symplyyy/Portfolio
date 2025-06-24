@@ -14,8 +14,9 @@ import { useNavbarColorScheme } from '@/hooks/useColorScheme';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
   const navRef = useRef(null);
-  const isLight = useNavbarColorScheme(isMobile);
+  const isLight = useNavbarColorScheme(isMobile || isTablet);
 
   // Fonction de navigation fluide vers les sections
   const handleNavigation = (sectionId: string) => {
@@ -61,15 +62,17 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 768);
+      setIsTablet(width >= 768 && width < 1024);
     };
     
-    checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
     
     return () => {
-      window.removeEventListener('resize', checkIsMobile);
+      window.removeEventListener('resize', checkScreenSize);
     };
   }, []);
 
@@ -124,8 +127,8 @@ export default function Navbar() {
         </div>
       </div>
       
-      {/* Menu Burger pour Mobile */}
-      {isMobile && (
+      {/* Menu Burger pour Mobile et Tablette */}
+      {(isMobile || isTablet) && (
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="relative z-[999] mt-7 cursor-pointer"
@@ -157,9 +160,9 @@ export default function Navbar() {
         </button>
       )}
 
-      {/* Menu plein écran pour Mobile */}
+      {/* Menu plein écran pour Mobile et Tablette */}
       <AnimatePresence>
-        {isOpen && isMobile && (
+        {isOpen && (isMobile || isTablet) && (
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -170,7 +173,9 @@ export default function Navbar() {
           >
             <div className="flex flex-col items-center h-full justify-center">
               <motion.ul
-                className="flex flex-col items-center gap-8 text-2xl mb-12"
+                className={`flex flex-col items-center gap-8 mb-12 ${
+                  isTablet ? 'text-3xl' : 'text-2xl'
+                }`}
                 initial="closed"
                 animate="open"
                 exit="closed"
@@ -192,7 +197,9 @@ export default function Navbar() {
                     }}
                   >
                     <button
-                      className="relative px-3 py-2 text-sm uppercase italic tracking-widest transition-all duration-300 rounded-xl hover:bg-[#5A1441] hover:text-white hover:scale-105 hover:shadow-md text-gray-800 cursor-pointer"
+                      className={`relative px-4 py-3 text-sm uppercase italic tracking-widest transition-all duration-300 rounded-xl hover:bg-[#5A1441] hover:text-white hover:scale-105 hover:shadow-md text-gray-800 cursor-pointer ${
+                        isTablet ? 'px-6 py-4' : 'px-4 py-3'
+                      }`}
                     >
                       {item}
                     </button>
@@ -200,9 +207,9 @@ export default function Navbar() {
                 ))}
               </motion.ul>
 
-              {/* Icônes sociales dans le menu mobile */}
+              {/* Icônes sociales dans le menu mobile/tablette */}
               <motion.div
-                className="flex gap-6"
+                className={`flex gap-6 ${isTablet ? 'gap-8' : 'gap-6'}`}
                 variants={{
                   open: {
                     opacity: 1,
@@ -219,26 +226,32 @@ export default function Navbar() {
                   href="https://github.com/symplyyy" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-gray-800/10 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-800/20 transition-all duration-300 hover:scale-110 transform"
+                  className={`bg-gray-800/10 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-800/20 transition-all duration-300 hover:scale-110 transform ${
+                    isTablet ? 'w-16 h-16' : 'w-12 h-12'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
-                  <FaGithub size={24} />
+                  <FaGithub size={isTablet ? 32 : 24} />
                 </a>
                 <a 
                   href="https://www.linkedin.com/in/tim%C3%A9o-so%C3%ABte-5644b8210/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-gray-800/10 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-800/20 transition-all duration-300 hover:scale-110 transform"
+                  className={`bg-gray-800/10 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-800/20 transition-all duration-300 hover:scale-110 transform ${
+                    isTablet ? 'w-16 h-16' : 'w-12 h-12'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
-                  <FaLinkedinIn size={24} />
+                  <FaLinkedinIn size={isTablet ? 32 : 24} />
                 </a>
                 <a 
                   href="mailto:timeosoete.dev@gmail.com"
-                  className="w-12 h-12 bg-gray-800/10 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-800/20 transition-all duration-300 hover:scale-110 transform"
+                  className={`bg-gray-800/10 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-800/20 transition-all duration-300 hover:scale-110 transform ${
+                    isTablet ? 'w-16 h-16' : 'w-12 h-12'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
-                  <HiOutlineMail size={24} />
+                  <HiOutlineMail size={isTablet ? 32 : 24} />
                 </a>
               </motion.div>
             </div>
@@ -246,8 +259,8 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Navigation Desktop */}
-      {!isMobile && (
+      {/* Navigation Desktop uniquement */}
+      {!isMobile && !isTablet && (
         <>
           <div className={`
             absolute left-1/2 transform -translate-x-1/2 mt-7 z-10

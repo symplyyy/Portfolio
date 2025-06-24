@@ -23,15 +23,15 @@ export const ScrollSpyNav: React.FC<ScrollSpyNavProps> = ({ sections, isLoading 
   const isLight = useSpyNavColorScheme(isMobile);
 
   useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024); // Inclut maintenant les tablettes
     };
     
-    checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
     
     return () => {
-      window.removeEventListener('resize', checkIsMobile);
+      window.removeEventListener('resize', checkScreenSize);
     };
   }, []);
 
@@ -176,7 +176,7 @@ export const ScrollSpyNav: React.FC<ScrollSpyNavProps> = ({ sections, isLoading 
     }
   };
 
-  // Si on est en mobile, ne pas rendre le composant
+  // Si on est en mobile ou tablette, ne pas rendre le composant
   if (isMobile) return null;
 
   return (
